@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlexBox Question</title>
+    <style>
+        .link-container {
+            background-color: lightgray;
+            padding: 2px;
+            height: 100px;
+        }
+        .link-container > div {
+            font-size: 1em;
+            list-style: none;
+            border: 2px black solid;
+            margin: 5px;
+            padding: 10px;
+        }
+        .link-container > div:hover {
+            background: blue;
+        }
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+        #outsider {
+            align-self: baseline;
+        }
+        @media only screen and (max-width: 600px) {
+            @media only screen and (min-width: 300px) {
+                body {
+                    background-color: red;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <div class="flex-container link-container">
+            <div><a href="#">One</a></div>
+            <div><a href="#">Two</a></div>
+            <div><a href="#">Three</a></div>
+            <div id="outsider"><a href="#">Four</a></div>
+            <div><a href="#">Five</a></div>
+        </div>
+    </div>
+</header>
+</body>
+</html>
