@@ -1,0 +1,17 @@
+<!--
+This is how we put comments in HTML
+Every thing within this is going to comment out.
+-->
+
+<!DOCTYPE html> <!--DOCTYPE defines the document type, for HTML5 and beyond we need to define it as html-->
+<html lang="en-us"> <!-- start of the html document-->
+<head>
+    <meta charset="UTF-8"> <!--Example of void element, refer to slides for more info-->
+    <title>&lt;&#450;&#x01C2;&gt;</title> <!-- title is Escapable raw text elements, here you can define reference characters, refer to slide for more info-->
+    <script rel="script" src="plaintext.js" ></script> <!-- script is raw text elements, here you can't define reference characters, you can include text files-->
+</head>
+<body onload="setParagraph()"> <!--onload attribute is event attribute. It is being called after a page has been loaded, more on this later-->
+<h1>Hello!</h1>
+<p id="unique"></p> <!--By defining id attribute, we assign unique name to this element. id follows singleton pattern. There is only one id name per element.-->
+</body>
+</html> <!-- end of the html document, as you can see, elements are nested into this parent element-->

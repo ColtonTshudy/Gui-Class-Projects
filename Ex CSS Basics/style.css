@@ -1,0 +1,167 @@
+/* This is how we add comment in CSS
+CSS syntax is build out of:
+    selector (Element in our HTML file that we want to change the look of it)
+    Declaration Block, which contains property name and a value
+        Property
+*/
+
+/* Selector  */
+
+body {
+    background-color: darkcyan;
+}
+
+
+.Container {
+    border-width: 4px;
+    border-style: solid;
+    border-color: red;
+    /* All the following properties can be combined into one property
+    Try the following property instead.
+    border: 4px solid red;
+     */
+}
+
+/* select paragraphs with class named big */
+p.big {
+    font-size: xx-large;
+}
+
+/* selecting multiple elements */
+h1, h2 {
+    color: azure;
+}
+
+#b_1 {
+    background-color: greenyellow;
+    margin: .3em;
+    border-width: .6em;
+    padding: .3em;
+}
+
+#b_1 {
+    background-color: white;
+    margin: .3em;
+    border-width: .6em;
+    padding: .3em;
+}
+
+button {
+    background-color: wheat;
+}
+/* Using space (descendant selector): Get all p elements inside descend id element and assign the following property to the selected elements */
+#descend p {
+    background-color: yellow;
+}
+
+#child > p {
+    background-color: yellow;
+}
+
+#adjacent + p {
+    background-color: yellow;
+}
+
+#general ~ p {
+    background-color: yellow;
+}
+
+/* example of pseudo-class selector*/
+#hover:hover {
+    background-color: yellow;
+}
+
+#bigLetter::first-letter {
+    font-size: xxx-large;
+}
+/* select p element with attribute data-1 (custom attribute) with value "hello" */
+p[data-1="hello"] {
+    background-color: white;
+}
+/* select p element with attribute data-1 (custom attribute) with value "bye" */
+p[data-1="bye"] {
+    background-color: blue;
+}
+
+/* select p element with attribute data-2 */
+p[data-2] {
+    background-color: aqua;
+}
+
+#inline li {
+    display: inline;
+    width: 20px;
+    height: 20px;
+}
+
+#inline_block > li {
+    display: inline-block;
+    width: 32%;
+    height: 40px;
+}
+
+#block li {
+    display: block;
+
+}
+
+/* flex display */
+
+.flexContainer {
+    display: flex;
+    flex-direction: row; /* defines our main axis */
+    flex-wrap: wrap;
+    justify-content: space-between; /* Align flex items along the main axis */
+    align-items: flex-end; /* Align flex items along cross axis */
+    height: 200px;
+}
+
+
+/* Grid display */
+
+.gridContainer {
+    display: grid;
+    height: 400px;
+    grid-template-columns: [start] 20% [line1] 20% [line2] 20% [line3] 20% [end];
+    grid-template-rows: [row1-start] 25% [row1-end] 25% [row2-end] 25% [row3-end] 25% [row4-end];
+    grid-template-areas:
+        "header header header header"
+        "item1 item1 . item2"
+        ". item3 . ."
+        "footer footer footer footer"
+
+;
+}
+
+#header {
+    grid-column-start: start;
+    grid-column-end: span end;
+    grid-row-start: row1-start;
+    grid-row-end: span row1-end;
+    justify-self: center; /* align along inline */
+    align-self: center; /* align along row */
+}
+
+#item1 {
+    grid-column: start / line1;
+    grid-row: row1-end / row2-end;
+}
+
+#item2 {
+    grid-column: line2 / end;
+    grid-row: row1-end / row2-end;
+}
+
+#item3 {
+    grid-area: item3;
+}
+
+#footer {
+    grid-area: footer;
+    justify-self: center; /* align along inline */
+    align-self: center; /* align along row */
+}
+
+
+
+

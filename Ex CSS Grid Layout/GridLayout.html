@@ -1,0 +1,50 @@
+<!-- In this html file we explore various selectors-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Here we're defining viewport, this meta-data will be used to create responsive website that will display correctly in every device. -->
+    <title>Combining display layouts</title>
+    <!--External CSS example -->
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!--Adding w3.css stylesheet-->
+</head>
+<body>
+
+<h1>Grid Layout</h1>
+
+<p>The following is an example of grid layout.
+We set the display of the container (parent element) to grid.
+    </p>
+<p>
+Pay attention to the background color for each element inside the grid layout. When we set justify and align properties to center,
+    The child item is no longer stretched, and it cannot cover the whole background.
+    There are many ways to solve this, but the main approach is to have a div element as an item holder and the text value as a child.
+    Check the HTML and CSS stye to better understand the approach.
+
+</p>
+
+
+    <ul class="gridContainer">
+        <li id="header" class="border">Header</li>
+        <li id="item1" class="border">item 1</li>
+        <li id="item2" class="border">item 2</li>
+        <li id="item3" class="border">item 3</li>
+        <li id="footer" class="border">Footer</li>
+    </ul>
+
+<h1>Combining grid layout and flex box</h1>
+
+<p>This is the same grid layout, but now we have a div element that contains p element for holding the text, and we assign a flex display to the div element. Check the CSS style sheet.
+Check the footer element. To make the styling easier, we created a class of style called Center, and we assigned it to our div element isnide the grid.</p>
+
+<ul class="gridContainer">
+    <li id="header-" class="border"><div><p>Header</p></div></li>
+    <li id="item1-" class="border">item 1</li>
+    <li id="item2-" class="border">item 2</li>
+    <li id="item3-" class="border">item 3</li>
+    <li id="footer-" class="border"><div class="Center"><p>Footer</p></div></li>
+</ul>
+
+</body>
+</html>

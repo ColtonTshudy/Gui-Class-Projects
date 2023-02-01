@@ -1,0 +1,137 @@
+
+.border {
+    border: 4px solid black;
+}
+
+
+/* Grid display */
+
+.gridContainer {
+    padding: 0;
+    list-style-type: none;
+    background-color: lightskyblue;
+    display: grid;
+    height: 400px;
+    grid-template-columns: [start] 25% [line1] 25% [line2] 25% [line3] 25% [end]; /* Here we define the name of the line and the percentage of each column*/
+    grid-template-rows: [row1-start] 25% [row1-end] 25% [row2-end] 25% [row3-end] 25% [row4-end];
+    /*
+    The top two properties creates the following grid layout:
+
+          Start       line1      line2      line3      end
+row1-start  -----------------------------------------------
+            |    20%    |    20%   |    20%   |    20%   |
+row1-end    -----------------------------------------------
+            |    20%    |    20%   |    20%   |    20%   |
+row2-end    -----------------------------------------------
+            |    20%    |    20%   |    20%   |    20%   |
+row3-end    -----------------------------------------------
+            |    20%    |    20%   |    20%   |    20%   |
+row4-end    -----------------------------------------------
+
+     */
+
+    /*
+    For the defined grid template we can assign name for each block area that we can assign to child elements.
+     */
+    grid-template-areas:
+        "header header header header"
+        "item1 item1 . item2"
+        ". item3 . ."
+        "footer footer footer footer";
+}
+
+#header{
+    grid-column-start: start;
+    grid-column-end:  end;
+    grid-row-start: row1-start;
+    grid-row-end:  row1-end;
+    /*grid-column: start / end;*/
+    /*grid-row: row1-start / row1-end;*/
+
+    /*
+    Like flexbox, we have justify (adjusting in main axis) and align (adjusting in cross axis).
+    The default value is stretch.
+     */
+    justify-self:  center; /* align along column (inline) */
+    align-self: center; /* align along row */
+    background-color: aqua;
+}
+
+#item1, #item1- {
+    grid-column: start / line1;
+    grid-row: row1-end / row2-end;
+    background-color: aqua;
+}
+
+#item2, #item2- {
+    grid-column: line2 / end;
+    grid-row: row1-end / row2-end;
+    background-color: aqua;
+}
+
+#item3, #item3- {
+    grid-area: item3;
+    background-color: aqua;
+}
+
+#footer{
+    grid-area: footer;
+    justify-self: center; /* align along inline */
+    align-self: center; /* align along row */
+    background-color: aqua;
+}
+
+#header- {
+    grid-column-start: start;
+    grid-column-end:  end;
+    grid-row-start: row1-start;
+    grid-row-end:  row1-end;
+    /*grid-column: start / end;*/
+    /*grid-row: row1-start / row1-end;*/
+
+    /*
+    Like flexbox, we have justify (adjusting in main axis) and align (adjusting in cross axis).
+    The default value is stretch.
+     */
+    justify-self:  stretch; /* align along column (inline) */
+    align-self: stretch; /* align along row */
+    background-color: aqua;
+}
+
+#footer- {
+    grid-area: footer;
+    background-color: aqua;
+}
+
+/*
+We defining a flex display for the div item
+ */
+#header- div {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+/*
+And for the paragraph (text) inside the div item we stylize it to be at the center.
+ */
+#header- p {
+    justify-self: center;
+    align-self: center;
+}
+
+/*
+Instead of applying style to div and then to the child inside the div, we can create a new class of styles and assign this to our html element.
+ */
+.Center {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+
+}
+
+
+
+

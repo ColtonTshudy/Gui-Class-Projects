@@ -1,0 +1,157 @@
+<!-- In this html file we explore various selectors-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Here we're defining viewport, this meta-data will be used to create responsive website that will display correctly in every device. -->
+    <title>Learning CSS</title>
+    <!--External CSS example -->
+    <link href="style.css" rel="stylesheet"> <!--   link tag is an empty element (Only contains attributes).
+                                                    It defines the relationship between the current html document and an external resource.
+                                                    It is often used to connect an external style sheets to the html page
+                                                    It also can be used to establish favicon (small icon on the tab for the home screen), external fonts, etc. to our page.
+                                                    href attribute specified the URL of the linked resource. A URL can be absolute or relative.
+                                                    rel attribute stands for "relationship", it defines the type of relationship between current document and the external resource.
+                                                            List of important values available for rel: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel
+                                                    -->
+
+    <!-- Internal CSS example -->
+    <style>
+        body {
+            background: maroon;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Exploring CSS Style</h1>
+
+<div class="Container"> <!-- div tag defines division (section) in an HTML document. Use div tag to nest group of element. This will help you easily access nested elements -->
+
+
+<p class="big">This html file provides some example to explore how to stylize the html page.</p>
+<p style="color: red"> This is an example of inline css, which applies unique style to a single element.</p>
+<p style="color: cyan; font-size: x-large">Avoid using inline style unless you have too!</p>
+
+
+
+</div>
+
+<div id="b_1" class="Container">
+    <button onclick="">Click me!</button>
+</div>
+
+<h1>Exploring various selectors in CSS</h1>
+
+<p class="big"> Descendent Selector, selects all elements descending </p>
+
+<div id="descend">
+    <p>child</p>
+    <div>
+        <p>sub child</p>
+    </div>
+    <p>child</p>
+</div>
+
+
+
+
+
+
+<p class="big"> Child Selector, selects only elements that are children of a specified element. </p>
+
+<div id="child">
+    <p>child</p>
+    <div>
+        <p>sub child</p>
+    </div>
+    <p>child</p>
+</div>
+
+<p class="big">Adjacent sibling selector, select the first adjacent sibling element after the selected element. </p>
+<div id="adjacent">This is our div item</div>
+<p>This p element comes exactly after div item.</p>
+<p>This is another p element.</p>
+
+<p class="big">General sibling selector, selects all the elements after the selected element</p>
+<div>
+    <div id="general">This is our div item</div>
+    <p>This is the first p element after div.</p>
+    <ul>
+        <li>some other stuff</li>
+    </ul>
+    <p>Another p element after div</p>
+    <p>And another one.</p>
+</div>
+
+<p class="big">The following is an example of pseudo-class selector. With this selector we can change the style of element based on the state (hover, focus, etc.) </p>
+
+<p id="hover">On hover change color!</p>
+
+<p class="big">We can use pseudo-element selector, to style specified part of an element, for example we can change the first letter of the element.</p>
+
+<p id="bigLetter">Once upon a time!</p>
+
+<p class="big">With attribute selector, we can select elements that have specific attributes, or attributes with specific value. </p>
+
+<p data-1="hello">custom1</p>
+<p data-2>custom2</p>
+<p data-2>custom3</p>
+<p data-1="bye">custom 4</p>
+
+<h2>Exploring layout (display property) in CSS</h2>
+
+<div>
+
+    <p>This is a default display for list item, which is a list-item display.</p>
+    <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+       <p> With inline display, width and height properties has no effect and elements will be displayed in one line.</p>
+    <ul id="inline">
+        <li class="Container">item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <p>With inline-block display, we can specify width and height for each block.
+    </p>
+    <ul id="inline_block">
+        <li class="Container">item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <p>While inline display appears on the same line, the block element starts a new line and takes up the full width. The full width is defined based on the parent element. </p>
+    <ul id="block">
+        <li class="Container">item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <p>The following is an example of flex display. We will cover this in more detail.</p>
+    <ul class="flexContainer">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <p>The following is an example of grid display.</p>
+
+    <ul class="gridContainer">
+        <li id="header">header</li>
+        <li id="item1">item 1</li>
+        <li id="item2">item 2</li>
+        <li id="item3">item 3</li>
+        <li id="footer">footer</li>
+    </ul>
+
+
+</div>
+
+</body>
+</html>

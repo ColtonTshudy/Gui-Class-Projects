@@ -1,0 +1,60 @@
+ul {
+    background-color: lightgray;
+    padding: 0;
+    height: 10em;
+
+
+}
+ul > li {
+    font-size: 4em;
+    list-style: none;
+    border: 2px black solid;
+    margin: 10px;
+}
+
+.flex-container{
+    display: flex;
+    flex-flow: row wrap-reverse; /* Try other values such as column,
+                                    column-revers and for flew-wrap try
+                                    nowrap, wrap-reverse
+                                    To see the effect of the wrap try
+                                    shrink you browser and see how the boxes
+                                    are going to get wrapped*/
+
+    justify-content: flex-start;   /* Try other values to see how
+                                    flex items are aligned
+                                    around the main axis
+                                    we have
+                                    flex-start
+                                    flex-end
+                                    center
+                                    space-between: the first item
+                                                    at the beginning
+                                                    and the last item at the end
+                                                    the rest evenly distributed
+                                     space-around: Evenly spaced but add half of it at the start
+                                                   and in the end.
+                                                   margin property will be ignored
+                                */
+    align-items: stretch;        /* Align flex item along cross axis
+                                    default: stretch
+                                    try:
+                                    baseline
+                                 */
+}
+
+#blacksheep {
+    align-self: baseline;
+}
+
+
+/*
+Uncomment this and try:
+you also can change the order of flex items!
+
+#box2 {
+    order: -1
+
+}
+*/
+
