@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exploring event and callbacks</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" rel="script"></script>
+</head>
+
+
+<body onload="handleOnLoad()">
+
+<h1>Callbacks and event loop</h1>
+
+<button onclick="exploringSetTimeOut()">Display alert after 2 seconds!</button>
+
+<br>
+
+<button onclick="exploreEvent1()">Click to understand callback queue!</button>
+
+<br>
+
+<button onclick="exploreEvent2()">There won't be any alert!</button>
+
+<br>
+
+<button onclick="nasaAPI()">NasaAPI</button>
+
+<br>
+
+<button onclick="exploringAsync()">Async Function</button>
+
+
+<h1>Event propagation</h1>
+
+<div onclick="alert('Event is in div element!')">
+    <p>We click in p element nested in div element, and the onclick callback inside the parent element get called</p>
+    <p>This is bubbling!</p>
+</div>
+
+<p>When an event happens on an element, first runs the handler on that element, then the parent, then all the way to highest ancestors</p>
+
+<p>Clicking the following button, will cause the callback of four element to get called.</p>
+
+<form onclick="alert('form element')">
+    <div onclick="alert('div element')">
+        <p onclick="alert('p element!')">
+            <button onclick="alert('button element!')">Bubbling!</button>
+        </p>
+    </div>
+</form>
+
+<form onfocus="handleFocus(this)">
+    <div onfocus="handleFocus(this)">
+        <label onfocus="handleFocus(this)"> My input!
+            <input type="text" onfocus="handleFocus(this)">
+        </label>
+    </div>
+</form>
+
+
+<p>This is an example of capturing, when you click on p element, instead of calling the call back of the p element then the div element, first the div element get handled then the p element. </p>
+
+
+
+<div>
+    <div class="border" id="lastDiv">
+    </div>
+</div>
+
+<br>
+
+
+<p>The following is an example of event delegation, which is event handling pattern.
+The approach is deprecated</p>
+
+
+<ul onclick="eventDelegation(event)"> <!--This approach is deprecated, check https://developer.mozilla.org/en-US/docs/Web/API/Window/event -->
+    <li id="one">one</li>
+    <li id="two">two</li>
+    <li id="three">three</li>
+    <li id="four">four</li>
+    <li id="more">And many more!</li>
+</ul>
+
+<p>This is the same example as before, but instead of passing event variable to the callback, we create a class that has its own onClick handler, without relying on Window.event property</p>
+
+<ul id="ul">
+    <li id="1">one</li>
+    <li id="2">two</li>
+    <li id="3">three</li>
+    <li id="4">four</li>
+    <li id="5">And many more!</li>
+</ul>
+
+</body>
+</html>
