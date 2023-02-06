@@ -9,9 +9,37 @@ version: 2/1/2023
     <meta charset="UTF-8">
     <meta name="author" content="Colton Tshudy">
     <meta name="date" content="02/01/2023">
+    <link href="hw1.css" rel="stylesheet">
+    <script src="hw1.js" rel="script"></script>
     <title>hw1-Java-API</title>
 </head>
 <body>
+
+<h1 class="flex-container">NASA API</h1>
+
+<form class="lower-padding flex-container">
+    <label for="date">Date:</label>
+    <input id="date" type="date" name="date">
+    <button type="button" onclick="fetchAPOTD()">Submit</button>
+</form>
+
+<div class="container">
+    <div class="item-1 flex-container">
+        <h2 id="apotd-title"></h2>
+    </div>
+    <div class="item-2">
+        <p id="apotd-caption"></p>
+    </div>
+    <div class="item-3 flex-container">
+        <img id="apotd-image">
+    </div>
+    <div class="item-4 flex-container">
+        <h4 id="apotd-copyright"></h4>
+    </div>
+    <div class="item-5 flex-container">
+        <h4 id="apotd-date"></h4>
+    </div>
+</div>
 
 </body>
 </html>
