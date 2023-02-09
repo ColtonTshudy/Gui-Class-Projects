@@ -1,10 +1,51 @@
+<!--
+author: Colton Tshudy
+version: 2/7/2023
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Colton Tshudy">
+    <meta name="date" content="02/07/2023">
+    <link href="hw2.css" rel="stylesheet">
+    <script src="hw2.js" rel="script"></script>
+    <title>hw2-Temperature-Converter</title>
 </head>
 <body>
-$END$
+
+<div class="container">
+    <div class="item-1 flex-centered bordered">
+        <h1 id="title">Temperature Converter</h1>
+    </div>
+    <div class="item-2 flex-centered">
+        <input class="bordered" id="input-1" type="text" name="input-1">
+    </div>
+    <div class="item-3 flex-centered">
+        <input class="bordered" id="input-2" type="text" name="input-1">
+    </div>
+    <div class="item-4 flex-centered-upper">
+        <select id="unit-select-1" name="units">
+            <option value="Celsius">Celsius</option>
+            <option value="Fahrenheit">Fahrenheit</option>
+            <option value="Kelvin">Kelvin</option>
+        </select>
+    </div>
+    <div class="item-5 flex-centered-upper">
+        <select id="unit-select-2" name="units">
+            <option value="Celsius">Celsius</option>
+            <option value="Fahrenheit">Fahrenheit</option>
+            <option value="Kelvin">Kelvin</option>
+        </select>
+    </div>
+    <div class="item-6 flex-centered">
+        <button class="bordered" id="convert" type="button" onclick="convert()">Convert!</button>
+    </div>
+    <div class="item-7 flex-centered bordered">
+        <h2 id="messages">message to user</h2>
+    </div>
+</div>
+
 </body>
 </html>
