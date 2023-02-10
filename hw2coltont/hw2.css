@@ -24,12 +24,11 @@ body {
 
 .bordered {
     border: 4px black solid;
-    margin: 10px;
 }
 
 .container {
     display: grid;
-    height: 600px;
+    height: 500px;
     grid-template-columns: repeat(4, 1fr [col-start]);
     grid-template-rows: repeat(5, 1fr [row-start]);
     background-color: saddlebrown;
@@ -79,15 +78,16 @@ body {
 }
 
 #convert {
+    height: 100%;
     width: 40%;
     font-size: 150%;
-    border-radius: 5%;
+    border-radius: 5%/20%;
     overflow: hidden;
 }
 
 input[type=text] {
-    height: 80%;
-    width: 30%;
+    height: 100%;
+    width: 50%;
     font-size: 250%;
 }
 
