@@ -1,20 +1,27 @@
+import React, { useState, useEffect } from "react";
 import './App.css';
-
-function SelectedList(props){
-  const list = props.selected.map(e => <li key={e+"list"} className={"listItems"}>{e}</li>);
-
-  return(
-      <div className={"selectedBox"}> The following boxes are selected:
-          <ul className={"listU"}>
-              {list}
-          </ul>
-      </div>
-  )
-}
+import UserInput from './components/UserInput';
+import Box from './components/Box';
+import Readout from './components/Readout';
 
 function App() {
+  const [boxCount, setBoxCount] = useState(0);
+  const [boxList, setBoxList] = useState([]);
+
+  useEffect(()=>{
+    return console.log(boxCount)
+  },[boxCount]);
+
   return (
-    <SelectedList selected={[1,2,3,4,5,6,7,7,7,7,7,7,7,7,7,7,7,7,7]}/>
+    <div id="main">
+      <div className="flex-container">
+        <UserInput callbackFunc={setBoxCount}/>
+        <Readout selected={[]}/>
+      </div>
+      <div>
+        
+      </div>
+    </div>
   );
 }
 

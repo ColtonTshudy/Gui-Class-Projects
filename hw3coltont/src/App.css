@@ -1,26 +1,62 @@
-.selectedBox{
+/*
+ * author: Colton Tshudy
+ * version: 2/24/2023
+ */
+
+body {
+  background-color: lightskyblue;
+  color: black;
+  margin: 20px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.blackBorder {
+  border-width: 5px;
+  border-color: black;
+}
+
+.selectedBorder {
+  border-width: 5px;
+  border-color: yellow;
+}
+
+.greenBox {
+  background-color: blue;
+}
+
+.blueBox {
+  background-color: green;
+}
+
+.redBox {
+  background-color: red;
+}
+
+#readout{
   display: flex;
   flex-direction: column;
   background-color: white;
   border: 5px solid black;
   height: 300px;
   width: 400px;
+  padding: 10px;
 }
 
-.listU{
-  display: flex;
+.listRoot{
   background-color: white;
-  width: 80px;
-  justify-content: normal;
-  overflow: hidden;
+  display: flex;
+  overflow: auto;
   flex-wrap: wrap;
   flex-direction: column;
-  
 }
 
-.listItems{
+.listRoot > li{
   background-color: white;
-  flex-direction: row;
-  width: fit-content;
-  break-after: column;
+  width: 10%;
 }
