@@ -17,8 +17,7 @@ body {
 }
 
 .blackBorder {
-  border-width: 5px;
-  border-color: black;
+  border: 5px solid black;
 }
 
 .selectedBorder {
@@ -27,28 +26,27 @@ body {
 }
 
 .greenBox {
-  background-color: blue;
+  background-color: green;
 }
 
 .blueBox {
-  background-color: green;
+  background-color: blue;
 }
 
 .redBox {
   background-color: red;
 }
 
-#readout{
+#readout {
   display: flex;
   flex-direction: column;
   background-color: white;
-  border: 5px solid black;
   height: 300px;
   width: 400px;
   padding: 10px;
 }
 
-.listRoot{
+.listRoot {
   background-color: white;
   display: flex;
   overflow: auto;
@@ -56,7 +54,23 @@ body {
   flex-direction: column;
 }
 
-.listRoot > li{
+.listRoot>li {
   background-color: white;
   width: 10%;
+}
+
+.boxContainer {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+}
+
+.generalBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
 }

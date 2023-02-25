@@ -1,11 +1,18 @@
-const UserInput = ( {callbackFunc} ) =>{
+const UserInput = ({ onInput }) => {
 
-    return(
-        <label> 
+    const checkAndUpdate = (event) => {
+        if (!isNaN(event.target.value))
+            onInput(event.target.value)
+        else
+            onInput(0)
+    }
+
+    return (
+        <label>
             Input number of boxes to generate:
-            <input type="number" name="boxes" placeholder="# Boxes" onChange={el=>callbackFunc(el.target.value)}/>
+            <input type="text" name="boxes" placeholder="# Boxes" onChange={checkAndUpdate} />
         </label>
     )
-  }
-  
-  export default UserInput;
+}
+
+export default UserInput;

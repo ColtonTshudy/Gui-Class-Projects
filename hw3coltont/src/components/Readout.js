@@ -1,8 +1,8 @@
 const Readout = ({ selected }) =>{
-  const listElements = selected.map(el => <li>{el}</li>);
+  const listElements = selected.map(el => <li>{el.value}</li>);
 
   return(
-      <div id={"readout"}> The following boxes are selected:
+      <div id={"readout"} className="blackBorder"> The following boxes are selected:
           <ul className={"listRoot"}>
               {listElements}
           </ul>
