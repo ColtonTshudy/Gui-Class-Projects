@@ -1,6 +1,6 @@
 /*
  * author: Colton Tshudy
- * version: 2/24/2023
+ * version: 2/26/2023
  */
 
 import React, { useState, useEffect } from "react";
@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     setSelected(selected.filter((value) => value <= boxCount))
   }, [boxCount])
-
 
   function boxClick(label) {
     const newValue = parseInt(label.innerText);
