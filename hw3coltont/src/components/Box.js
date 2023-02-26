@@ -1,4 +1,7 @@
-
+/*
+ * author: Colton Tshudy
+ * version: 2/24/2023
+ */
 
 const isPrime = (number) => {
     if (number == 2)
@@ -20,10 +23,10 @@ const getColor = (number) => {
     return "redBox" // Even
 }
 
-const Box = ({ value }) => {
+const Box = ({ value, onClick }) => {
     const colorClass = getColor(value)
     return (
-        <label className={`generalBox ${colorClass} blackBorder`}>
+        <label className={`generalBox ${colorClass} blackBorder`} onClick={() => onClick(value)}>
             {value}
         </label>
     )

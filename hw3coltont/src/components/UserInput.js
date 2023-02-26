@@ -1,3 +1,8 @@
+/*
+ * author: Colton Tshudy
+ * version: 2/24/2023
+ */
+
 const UserInput = ({ onInput }) => {
 
     const checkAndUpdate = (event) => {
