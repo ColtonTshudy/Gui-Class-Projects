@@ -18,16 +18,18 @@ function App() {
   }, [boxCount])
 
 
-  function boxClick(newValue) {
+  function boxClick(label) {
+    const newValue = parseInt(label.innerText);
     const index = selected.indexOf(newValue);
     if (index !== -1) {
+      label.classList.remove("selectedBox")
       setSelected(selected.filter((value) => value != newValue))
     }
     else {
+      label.classList.add("selectedBox")
       selected.push(newValue)
       setSelected([...selected.map(e => Number(e)).sort(function(a, b){return a-b})])
     }
-    
   }
   const arr = []
   for (let i = 0; i < boxCount; i++) {

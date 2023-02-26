@@ -26,7 +26,7 @@ const getColor = (number) => {
 const Box = ({ value, onClick }) => {
     const colorClass = getColor(value)
     return (
-        <label className={`generalBox ${colorClass} blackBorder`} onClick={() => onClick(value)}>
+        <label className={`generalBox ${colorClass} blackBorder`} onClick={(el) => onClick(el.target)}>
             {value}
         </label>
     )
