@@ -1,0 +1,9 @@
+.Container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: disc;
+    flex-direction: row-reverse;
+    padding: 0;
+}

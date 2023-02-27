@@ -1,0 +1,80 @@
+/*
+ * author: Colton Tshudy
+ * version: 2/26/2023
+ */
+
+body {
+  background-color: lightskyblue;
+  color: black;
+  margin: 20px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.blackBorder {
+  border: 5px solid black;
+}
+
+.selectedBorder {
+  border-width: 5px;
+  border-color: yellow;
+}
+
+.greenBox {
+  background-color: green;
+}
+
+.blueBox {
+  background-color: blue;
+}
+
+.redBox {
+  background-color: red;
+}
+
+#readout {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 300px;
+  width: 400px;
+  padding: 10px;
+}
+
+.listRoot {
+  background-color: white;
+  display: flex;
+  overflow: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.listRoot>li {
+  background-color: white;
+  width: 10%;
+}
+
+.boxContainer {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+}
+
+.generalBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.selectedBox {
+  border-color:gold;
+}
