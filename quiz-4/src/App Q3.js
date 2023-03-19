@@ -12,7 +12,7 @@ function EffectCompFunction(props) {
       console.log("cleaned")
       clearTimeout(timeId)
     }
-  }, [])
+  }, [state.count])
 
   return (
     <p>{state.count}</p>
