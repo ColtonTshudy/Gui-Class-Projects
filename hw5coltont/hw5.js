@@ -5,7 +5,7 @@
 
 async function render() {
     const response = await fetch("./data.json");
-    const data = await response.json().then(console.log("data recieved"));
+    const data = await response.json().then(console.log("data recvd"));
     
     plotScatter(data)
     plotPie(data)
