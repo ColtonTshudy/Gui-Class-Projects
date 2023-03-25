@@ -93,23 +93,23 @@ function exploringPieLayout() {
 
     // Adding text
 
-    //     let toolTip = d3.select('.pie-container')
-    //         .append('text')
-    //         .attr('visibility', 'hidden')
-    //         .attr('id', 'pi-info')
-    //         .attr('pointer-events', 'none')
-    //
-    //     pieSel.on('mouseover', function(e, d){
-    //         console.log('here')
-    //         let [x, y] = d3.pointer(e, this)
-    //         toolTip.attr('visibility', 'visible')
-    //             .text(d.value)
-    // })
-    //
-    //     pieSel.on('mouseleave', function(e, d){
-    //         toolTip.attr('visibility', 'hidden')
-    //
-    // })
+        let toolTip = d3.select('.pie-container')
+            .append('text')
+            .attr('visibility', 'hidden')
+            .attr('id', 'pi-info')
+            .attr('pointer-events', 'none')
+    
+        pieSel.on('mouseover', function(e, d){
+            console.log('here')
+            let [x, y] = d3.pointer(e, this)
+            toolTip.attr('visibility', 'visible')
+                .text(d.value)
+    })
+    
+        pieSel.on('mouseleave', function(e, d){
+            toolTip.attr('visibility', 'hidden')
+    
+    })
 }
 
 function expoloringHistogram() {
@@ -143,7 +143,7 @@ function expoloringHistogram() {
         .append('g')
         .attr('class', 'hist-container')
 
-    let x = d3.scaleLinear().domain([0, 10]).range([30, width - 30])
+    let x = d3.scaleLinear().domain([0, 9]).range([30, width - 30])
     let maxLength = d3.max(buckets.map(element => element.length))  // Check the length property in buckets
     var y = d3.scaleLinear().domain([0, maxLength]).range([height, 0])
     let colorBin = d3.scaleThreshold().domain(buckets.map(d => d.x0)).range(d3.schemePastel2)

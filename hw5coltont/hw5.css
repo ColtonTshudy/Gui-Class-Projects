@@ -3,85 +3,84 @@
  * version: 3/22/2023
  */
 
-:root {
-    --border-color: white;
+* {
+    box-sizing: border-box;
+    min-width: 0;
 }
 
-body {
-    background-color: black;
-    color: white;
+body,
+html {
+    
+    height: 100%;
+    width: 100%;
+
+    background-color: white;
+    color: black;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
 }
 
-.lower-padding {
-    padding-bottom: 25px;
+.full-size {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 }
 
-.flex-container {
+.bordered {
+    border: 5px black solid;
+}
+
+.flex-row {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.flex-column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
 }
 
-.container {
-    display: grid;
-    height: 600px;
-    grid-template-columns: repeat(4, 1fr [col-start]);
-    grid-template-rows: repeat(6, 1fr [row-start]);
-    background-color: darkslategray;
-    padding: 20px
+.align-left {
+    align-self: flex-start;
 }
 
-.item-1 {
-    grid-column: 1 / span 4;
-    grid-row: 1;
-    background-color:burlywood;
-    color: black;
+#container {
+    padding: 20px;
+    justify-content: space-between;
 }
 
-.item-2 {
-    grid-column: 1 / span 2;
-    grid-row: 2 / span 4;
-    border-style: solid;
-    border-color: var(--border-color);
-    overflow: auto;
-    background-color:dimgray;
-    padding: 15px;
+#top-graphs {
+    flex: 0 0 60%;
 }
 
-#apotd-caption {
-    margin: 0px;
-    padding: 0px;
+#scatter-plot {
+    align-self: center;
 }
 
-.item-3 {
-    grid-column: 3 / span 2;
-    grid-row: 2 / span 4;
-    border-style: solid;
-    border-color: var(--border-color);
-    background-color: mediumpurple;
-    padding:5px;
+#bottom-graphs {
+    flex: 0 0 38%;
+    justify-content: space-between;
 }
 
-.item-3 > img {
-    object-fit: cover;
-    display: block;
-    max-width:100%;
-    max-height:100%;
-    width: auto;
-    height: auto;
+#pie {
+    flex: 0 0 30%;
 }
 
-.item-4 {
-    grid-column: 1 / span 2;
-    grid-row: 6;
-    background-color:darkgray;
-    color: black;
+#info {
+    flex: 0 0 30%;
 }
 
-.item-5 {
-    grid-column: 3 / span 2;
-    grid-row: 6;
-    background-color:rebeccapurple;
-    color: white;
+#bar {
+    flex: 0 0 30%;
 }
