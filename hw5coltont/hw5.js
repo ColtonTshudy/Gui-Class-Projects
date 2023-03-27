@@ -3,6 +3,9 @@
  * version: 3/22/2023
  */
 
+// Global constants
+const colorScheme = ['red', 'green', 'blue']
+
 // Occurs on first loading of the page
 async function onload() {
     const response = await fetch("./data.json");
@@ -24,49 +27,164 @@ async function onload() {
 
 // Calls each graph's render function
 function renderGraphs(data, averages) {
-    plotScatter(data, 0.8)
-    plotPie(averages, 0.8)
-    plotBar(averages, 0.8)
+    plotScatter(data, 0.7)
+    plotPie(averages, 0.7)
+    plotBar(averages, 0.7)
 }
 
 // Scatter plot of data over time. Scale is a size multiplier
 function plotScatter(data, scale) {
+    [width, height] = getElementSize('scatter').map((x) => x * scale)
 
+    const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+    const verticalMargin = 0.05; //percentage of space to add to forehead
+    const dotRadius = 4
+
+    // Delete old graph
+    try { document.querySelector('#scatter>svg').remove() }
+    catch { }
+
+    // SVG Root
+    const svg = d3.select("#scatter")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom + verticalMargin * height)
+        .append("g")
+        .attr("transform", `translate(${margin.left}, ${margin.top + verticalMargin * height})`)
+
+    // Generate axes
+    const xScale = d3.scaleTime().range([0, width]);
+    const yScale = d3.scaleLinear().range([height, 0]);
+    xScale.domain(d3.extent(data, d => new Date(d.Week)));
+    yScale.domain([0, d3.max(data, d => d3.max([d.javascript, d.python, d.java]))]);
+
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xScale));
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+    // Draw data points
+    const circlesJavascript = svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xScale(new Date(d.Week)))
+        .attr("cy", d => yScale(d.javascript))
+        .attr("r", dotRadius)
+        .attr("fill", colorScheme[0])
+        .attr("data-tooltip", d => `javascript: ${d.javascript} (${d.Week})`)
+
+    const circlesPython = svg.selectAll("circlesPython")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xScale(new Date(d.Week)))
+        .attr("cy", d => yScale(d.python))
+        .attr("r", dotRadius)
+        .attr("fill", colorScheme[1])
+        .attr("data-tooltip", d => `python: ${d.python} (${d.Week})`)
+
+    const circlesJava = svg.selectAll("cyclesJava")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xScale(new Date(d.Week)))
+        .attr("cy", d => yScale(d.java))
+        .attr("r", dotRadius)
+        .attr("fill", colorScheme[2])
+        .attr("data-tooltip", d => `java: ${d.java} (${d.Week})`)
+
+    // Draw lines
+    const line = d3.line()
+        .x(d => xScale(new Date(d.Week)))
+        .y(d => yScale(d.value))
+        .curve(d3.curveLinear);
+
+    const paths = svg.selectAll(".line")
+        .data(["javascript", "python", "java"])
+        .enter()
+        .append("path")
+        .attr("d", d => line(data.map(e => ({ Week: e.Week, value: e[d] }))))
+        .style("fill", "none")
+        .style("stroke-width", "2px")
+        .style("stroke", d => d === 'javascript' ? colorScheme[0] : d === 'python' ? colorScheme[1] : colorScheme[2])
+
+
+    // Tooltips
+    const tooltip = d3.select('#scatter').append('div')
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    circlesJavascript.on("mouseover", function () {
+        tooltip.transition()
+            .style("opacity", 1);
+        tooltip.html(this.getAttribute("data-tooltip"))
+    })
+        .on("mouseout", function () {
+            tooltip.transition()
+                .style("opacity", 0);
+        });
+
+    circlesPython.on("mouseover", function () {
+        tooltip.transition()
+            .style("opacity", 1);
+        tooltip.html(this.getAttribute("data-tooltip"))
+    })
+        .on("mouseout", function () {
+            tooltip.transition()
+                .style("opacity", 0);
+        });
+
+    circlesJava.on("mouseover", function (e) {
+        tooltip.transition()
+            .style("opacity", 1);
+        tooltip.html(this.getAttribute("data-tooltip"))
+    })
+        .on("mouseout", function () {
+            tooltip.transition()
+                .style("opacity", 0);
+        });
 }
 
 // Pie chart of average of every data point. Scale is a size multiplier
 function plotPie(data, scale) {
-    size = getMinSize('pie') * scale
+    size = Math.min(...getElementSize('pie')) * scale
     console.log(`pie size: ${size}`)
 
-    // Get simple array of averages
+    verticalMargin = 0.05; //percentage of space to add to forehead
+    margin = 10; //px of total margin
+
+    // Build data
     values = []
     for (k in data) { values.push(data[k]) }
+    console.log('Pie Data:')
+    console.log(values)
 
     // Generate the pie chart data
     const arcData = d3.pie()(values)
-    console.log(`Arch Data: \n`)
+    console.log(`Pie Arch Data: \n`)
     console.log(arcData)
     const arcMaker = d3.arc().innerRadius(size / 5).outerRadius(size / 2).padAngle(.1)
 
     // Calculate the arch
     console.log(`Arch Maker:\n`)
     console.log(arcData.map(element => arcMaker(element)))  // Generates arc
-    console.log(d3.schemePastel1) // Color scheme
 
     // Create ordinal scaling
-    const scC = d3.scaleOrdinal().range(d3.schemeSet1).domain(arcData.map(d => d.index))
+    const scC = d3.scaleOrdinal().range(['red', 'green', 'blue']).domain(arcData.map(d => d.index))
 
+    // Delete old graph
     try { document.querySelector('#pie>svg').remove() }
     catch { }
 
     // SVG Root
     const g = d3.select('#pie')
         .append('svg')
-        .attr('width', size + 1)
-        .attr('height', size + 1)
+        .attr('width', size + margin)
+        .attr('height', size + margin + size * verticalMargin)
         .append('g')
-        .attr('transform', `translate(${size / 2}, ${size / 2})`)
+        .attr('transform', `translate(${(size + margin) / 2}, ${(size + margin) / 2 + size * verticalMargin})`)
 
     // Draw the arc
     const pieSel = g.selectAll('path')
@@ -95,17 +213,20 @@ function plotPie(data, scale) {
     pieSel.on('mouseleave', function (e, d) {
         toolTip.attr('visibility', 'hidden')
             .text('')
-
     })
 }
 
 function plotBar(data, scale) {
-    container = document.getElementById('bar')
-    width = container.clientWidth * scale
-    height = container.clientHeight * scale
+    [width, height] = getElementSize('bar').map((x) => x * scale)
 
+    verticalMargin = 0.05; //percentage of space to add to forehead
+
+    // Build data
     dataArray = Object.entries(data).map(([key, value]) => ({ language: key, average: value }))
+    console.log('Bargraph Data:')
+    console.log(dataArray)
 
+    // Delete old graph
     try { document.querySelector('#bar>svg').remove() }
     catch { }
 
@@ -113,8 +234,9 @@ function plotBar(data, scale) {
     var svg = d3.select("#bar")
         .append("svg")
         .attr("width", width)
-        .attr("height", height)
+        .attr("height", height + height * 0.05)
         .append("g")
+        .attr("transform", `translate(${0},${height * 0.05})`);
 
     // X axis
     var x = d3.scaleBand()
@@ -127,7 +249,7 @@ function plotBar(data, scale) {
         .domain([0, d3.max(dataArray, d => d.average)])
         .range([height, 0])
 
-    let colorBar = d3.scaleThreshold().domain(dataArray.map(d => d.language)).range(d3.schemeSet1)
+    let colorBar = d3.scaleThreshold().domain(dataArray.map(d => d.language)).range(['blue', 'red', 'green'])
 
     // Bars
     barSel = svg.selectAll("mybar")
@@ -163,11 +285,9 @@ function plotBar(data, scale) {
 }
 
 // Returns the smaller of width and height of an element
-function getMinSize(element) {
+function getElementSize(element) {
     container = document.getElementById(element)
-    width = container.clientWidth
-    height = container.clientHeight
-    return Math.min(width, height)
+    return [container.clientWidth, container.clientHeight]
 }
 
 // Creates an unordered list of a given dictionary for the info tab.

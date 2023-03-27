@@ -64,7 +64,7 @@ html {
     flex: 0 0 60%;
 }
 
-#scatter-plot {
+#scatter {
     align-self: center;
 }
 
@@ -79,6 +79,7 @@ html {
 
 #info {
     flex: 0 0 30%;
+    flex-shrink: 2;
 }
 
 #bar {
