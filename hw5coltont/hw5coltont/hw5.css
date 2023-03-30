@@ -1,0 +1,114 @@
+/*
+ * author: Colton Tshudy
+ * version: 3/22/2023
+ */
+
+* {
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+body,
+html {
+    
+    height: 100%;
+    width: 100%;
+
+    background-color: white;
+    color: black;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.full-size {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.bordered {
+    border: 5px black solid;
+}
+
+.flex-row {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.flex-column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.align-left {
+    align-self: flex-start;
+}
+
+#container {
+    padding: 20px;
+    justify-content: space-between;
+}
+
+#top-graphs {
+    flex: 0 0 60%;
+    height: 60%;
+}
+
+#scatter {
+    align-self: center;
+}
+
+#bottom-graphs {
+    flex: 0 0 38%;
+    justify-content: space-between;
+}
+
+#pie {
+    flex: 0 0 30%;
+}
+
+#info {
+    flex: 0 0 30%;
+    flex-shrink: 2;
+}
+
+#bar {
+    flex: 0 0 30%;
+}
+
+#bar-tip {
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    visibility: hidden;
+}
+
+#pie-tip {
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    visibility: hidden;
+}
+
+#scatter-tip {
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
+}

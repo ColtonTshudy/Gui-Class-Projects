@@ -1,0 +1,47 @@
+<!--
+author: Colton Tshudy
+version: 3/22/2023
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Colton Tshudy">
+    <meta name="date" content="03/22/2023">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="hw5.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js" type="text/javascript"></script>
+    <script src="hw5.js" rel="script"></script>
+    <title>hw5 d3 graphs</title>
+</head>
+
+<body onload={onload()}>
+    <div id="container" class="flex-column full-size">
+
+
+        <div id="top-graphs" class="full-size">
+            <div id="scatter" class="bordered full-size flex-column">
+                <label>Scatter Plot</label>
+            </div>
+        </div>
+            
+        <div id="bottom-graphs" class="flex-row full-size">
+            <div id="pie" class="bordered full-size flex-column">
+                <label>Pie Chart</label>
+            </div>
+            <div id="info" class="bordered full-size flex-column">
+                <h1>Info</h1>
+                <label>Average value of Google Trend interest over the duration of three years for three languages:</label>
+                <ul class="align-left"></ul>
+            </div>
+            <div id="bar" class="bordered full-size flex-column">
+                <label>Bar Chart</label>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
