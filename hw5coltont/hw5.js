@@ -197,22 +197,35 @@ function plotPie(data, scale) {
         .attr('stroke-width', 4)
 
     // Tooltip
+    a = document.querySelector('#pie>svg').getBoundingClientRect();
+
     let toolTip = d3.select('#pie')
-        .append('text')
-        .attr('visibility', 'hidden')
-        .attr('id', 'pi-info')
+        .append('div')
+        .attr('class', 'toolTip')
         .attr('pointer-events', 'none')
 
     pieSel.on('mouseover', function (e, d) {
-        let keys = Object.keys(data)
-        let [x, y] = d3.pointer(e, this)
-        toolTip.attr('visibility', 'visible')
+        const [x, y] = d3.pointer(e, this)
+        const keys = Object.keys(data)
+        toolTip.style('visibility', 'visible')
             .text(`${keys[values.indexOf(d.value)]}: ${d.value}`)
     })
 
+    pieSel.on('mousemove', function (e, d) {
+        const [x, y] = d3.pointer(e, this)
+        const keys = Object.keys(data)
+        toolTip.style('visibility', 'visible')
+            .text(`${keys[values.indexOf(d.value)]}: ${d.value}`)
+            .style('position', 'absolute')
+            .style('left', (a.left + x) + 'px')
+            .style('top', (a.top + y) + 'px');
+
+        console.log(a.left)
+        console.log(a.top)
+    })
+
     pieSel.on('mouseleave', function (e, d) {
-        toolTip.attr('visibility', 'hidden')
-            .text('')
+        toolTip.style('visibility', 'hidden')
     })
 }
 
@@ -262,25 +275,33 @@ function plotBar(data, scale) {
         .attr("height", function (d) { return height - y(d.average); })
         .attr('fill', d => colorBar(d.language))
         .attr('stroke', 'black')
-        .attr('stroke-width', 4)
+        .attr('stroke-width', 4);
 
     // Tooltip
+    graphLocation = document.querySelector('#bar>svg').getBoundingClientRect();
+
     let toolTip = d3.select('#bar')
-        .append('text')
-        .attr('visibility', 'hidden')
-        .attr('id', 'bar-info')
+        .append('div')
+        .attr('class', 'toolTip')
         .attr('pointer-events', 'none')
 
     barSel.on('mouseover', function (e, d) {
         let [x, y] = d3.pointer(e, this)
-        toolTip.attr('visibility', 'visible')
+        toolTip.style('visibility', 'visible')
             .text(`${d.language}: ${d.average}`)
     })
 
-    barSel.on('mouseleave', function (e, d) {
-        toolTip.attr('visibility', 'hidden')
-            .text('')
+    barSel.on('mousemove', function (e, d) {
+        let [x, y] = d3.pointer(e, this)
+        toolTip.style('visibility', 'visible')
+            .text(`${d.language}: ${d.average}`)
+            .style('position', 'absolute')
+            .style('left', (graphLocation.left + x + 10) + 'px')
+            .style('top', (graphLocation.top + y + 30) + 'px');
+    })
 
+    barSel.on('mouseleave', function (e, d) {
+        toolTip.style('visibility', 'hidden')
     })
 }
 
