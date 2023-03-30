@@ -154,7 +154,7 @@ function plotPie(data, scale) {
 
     verticalMargin = 0.05; //percentage of space to add to forehead
     margin = 10; //px of total margin
-
+    
     // Build data
     values = []
     for (k in data) { values.push(data[k]) }
@@ -175,7 +175,10 @@ function plotPie(data, scale) {
     const scC = d3.scaleOrdinal().range(['red', 'green', 'blue']).domain(arcData.map(d => d.index))
 
     // Delete old graph
-    try { document.querySelector('#pie>svg').remove() }
+    try { 
+        document.querySelector('#pie>svg').remove() 
+        document.querySelector('#pie>div').remove()
+    }
     catch { }
 
     // SVG Root
@@ -195,25 +198,6 @@ function plotPie(data, scale) {
         .attr('fill', d => scC(d))
         .attr('stroke', 'black')
         .attr('stroke-width', 4)
-
-    // Tooltip
-    let toolTip = d3.select('#pie')
-        .append('text')
-        .attr('visibility', 'hidden')
-        .attr('id', 'pi-info')
-        .attr('pointer-events', 'none')
-
-    pieSel.on('mouseover', function (e, d) {
-        let keys = Object.keys(data)
-        let [x, y] = d3.pointer(e, this)
-        toolTip.attr('visibility', 'visible')
-            .text(`${keys[values.indexOf(d.value)]}: ${d.value}`)
-    })
-
-    pieSel.on('mouseleave', function (e, d) {
-        toolTip.attr('visibility', 'hidden')
-            .text('')
-    })
 }
 
 function plotBar(data, scale) {
@@ -227,7 +211,10 @@ function plotBar(data, scale) {
     console.log(dataArray)
 
     // Delete old graph
-    try { document.querySelector('#bar>svg').remove() }
+    try { 
+        document.querySelector('#bar>svg').remove() 
+        document.querySelector('#bar>div').remove()
+    }
     catch { }
 
     // SVG Root
@@ -265,22 +252,30 @@ function plotBar(data, scale) {
         .attr('stroke-width', 4)
 
     // Tooltip
+    graphLocation = document.querySelector('#bar>svg').getBoundingClientRect();
+
     let toolTip = d3.select('#bar')
-        .append('text')
-        .attr('visibility', 'hidden')
-        .attr('id', 'bar-info')
+        .append('div')
+        .attr('class', 'toolTip')
         .attr('pointer-events', 'none')
 
     barSel.on('mouseover', function (e, d) {
         let [x, y] = d3.pointer(e, this)
-        toolTip.attr('visibility', 'visible')
+        toolTip.style('visibility', 'visible')
             .text(`${d.language}: ${d.average}`)
     })
 
-    barSel.on('mouseleave', function (e, d) {
-        toolTip.attr('visibility', 'hidden')
-            .text('')
+    barSel.on('mousemove', function (e, d) {
+        let [x, y] = d3.pointer(e, this)
+        toolTip.style('visibility', 'visible')
+            .text(`${d.language}: ${d.average}`)
+            .style('position', 'absolute')
+            .style('left', (graphLocation.left + x + 10) + 'px')
+            .style('top', (graphLocation.top + y + 30) + 'px');
+    })
 
+    barSel.on('mouseleave', function (e, d) {
+        toolTip.style('visibility', 'hidden')
     })
 }
 

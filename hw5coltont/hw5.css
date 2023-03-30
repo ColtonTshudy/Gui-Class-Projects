@@ -62,6 +62,7 @@ html {
 
 #top-graphs {
     flex: 0 0 60%;
+    height: 60%;
 }
 
 #scatter {
@@ -84,4 +85,13 @@ html {
 
 #bar {
     flex: 0 0 30%;
+}
+
+.toolTip {
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    visibility: hidden;
 }
