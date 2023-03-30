@@ -87,11 +87,28 @@ html {
     flex: 0 0 30%;
 }
 
-.toolTip {
+#bar-tip {
     background-color: white;
     border: solid;
     border-width: 2px;
     border-radius: 5px;
     padding: 5px;
     visibility: hidden;
+}
+
+#pie-tip {
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    visibility: hidden;
+}
+
+#scatter-tip {
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 5px;
 }

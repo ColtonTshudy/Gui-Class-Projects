@@ -112,15 +112,25 @@ function plotScatter(data, scale) {
 
 
     // Tooltips
+    scatterLocation = document.querySelector('#scatter>svg').getBoundingClientRect();
+
     const tooltip = d3.select('#scatter').append('div')
-        .attr("class", "tooltip")
-        .style("opacity", 0);
+        .attr("id", "scatter-tip")
+        .style("opacity", 0)
+        .style("position", "absolute");
 
     circlesJavascript.on("mouseover", function () {
         tooltip.transition()
             .style("opacity", 1);
         tooltip.html(this.getAttribute("data-tooltip"))
     })
+        .on("mousemove", function (e) {
+            let [x, y] = d3.pointer(e, this)
+            tooltip.transition()
+                .style("opacity", 1)
+                .style('left', (scatterLocation.left + x) + 'px')
+                .style('top', (scatterLocation.top + y) + 'px');
+        })
         .on("mouseout", function () {
             tooltip.transition()
                 .style("opacity", 0);
@@ -131,6 +141,13 @@ function plotScatter(data, scale) {
             .style("opacity", 1);
         tooltip.html(this.getAttribute("data-tooltip"))
     })
+        .on("mousemove", function (e) {
+            let [x, y] = d3.pointer(e, this)
+            tooltip.transition()
+                .style("opacity", 1)
+                .style('left', (scatterLocation.left + x) + 'px')
+                .style('top', (scatterLocation.top + y) + 'px');
+        })
         .on("mouseout", function () {
             tooltip.transition()
                 .style("opacity", 0);
@@ -141,6 +158,13 @@ function plotScatter(data, scale) {
             .style("opacity", 1);
         tooltip.html(this.getAttribute("data-tooltip"))
     })
+        .on("mousemove", function (e) {
+            let [x, y] = d3.pointer(e, this)
+            tooltip.transition()
+                .style("opacity", 1)
+                .style('left', (scatterLocation.left + x) + 'px')
+                .style('top', (scatterLocation.top + y) + 'px');
+        })
         .on("mouseout", function () {
             tooltip.transition()
                 .style("opacity", 0);
@@ -154,7 +178,7 @@ function plotPie(data, scale) {
 
     verticalMargin = 0.05; //percentage of space to add to forehead
     margin = 10; //px of total margin
-    
+
     // Build data
     values = []
     for (k in data) { values.push(data[k]) }
@@ -175,8 +199,8 @@ function plotPie(data, scale) {
     const scC = d3.scaleOrdinal().range(['red', 'green', 'blue']).domain(arcData.map(d => d.index))
 
     // Delete old graph
-    try { 
-        document.querySelector('#pie>svg').remove() 
+    try {
+        document.querySelector('#pie>svg').remove()
         document.querySelector('#pie>div').remove()
     }
     catch { }
@@ -198,6 +222,35 @@ function plotPie(data, scale) {
         .attr('fill', d => scC(d))
         .attr('stroke', 'black')
         .attr('stroke-width', 4)
+
+    // Tooltip
+    pieLocation = document.querySelector('#pie>svg').getBoundingClientRect();
+
+    let pieTip = d3.select('#pie')
+        .append('div')
+        .attr('id', 'pie-tip')
+        .attr('pointer-events', 'none')
+
+    pieSel.on('mouseover', function (e, d) {
+        let [x, y] = d3.pointer(e, this)
+        const keys = Object.keys(data)
+        pieTip.style('visibility', 'visible')
+            .text(`${keys[values.indexOf(d.value)]}: ${d.value}`)
+    })
+
+    pieSel.on('mousemove', function (e, d) {
+        let [x, y] = d3.pointer(e, this)
+        const keys = Object.keys(data)
+        pieTip.style('visibility', 'visible')
+            .text(`${keys[values.indexOf(d.value)]}: ${d.value}`)
+            .style('position', 'absolute')
+            .style('left', (pieLocation.left + x + 110) + 'px')
+            .style('top', (pieLocation.top + y + 170) + 'px');
+    })
+
+    pieSel.on('mouseleave', function (e, d) {
+        pieTip.style('visibility', 'hidden')
+    })
 }
 
 function plotBar(data, scale) {
@@ -211,8 +264,8 @@ function plotBar(data, scale) {
     console.log(dataArray)
 
     // Delete old graph
-    try { 
-        document.querySelector('#bar>svg').remove() 
+    try {
+        document.querySelector('#bar>svg').remove()
         document.querySelector('#bar>div').remove()
     }
     catch { }
@@ -256,7 +309,7 @@ function plotBar(data, scale) {
 
     let toolTip = d3.select('#bar')
         .append('div')
-        .attr('class', 'toolTip')
+        .attr('id', 'bar-tip')
         .attr('pointer-events', 'none')
 
     barSel.on('mouseover', function (e, d) {
