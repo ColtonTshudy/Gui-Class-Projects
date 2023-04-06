@@ -30,7 +30,7 @@ html {
 
 #container {
     margin: auto auto;
-    background: rgba(0, 0, 0, 0.4);
+    
     padding: 15px;
     border-radius: 10px;
 }
@@ -39,7 +39,6 @@ html {
     margin: 15px;
     align-self: stretch;
 }
-
 
 #bg-holder {
     position: absolute;
@@ -60,4 +59,15 @@ html {
     z-index: -1;
     color: transparent;
     text-shadow: 0 0 20px white;
+}
+
+#note {
+    font-size: 1.5vw;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    padding: 3px;
+}
+
+.rounded-transparent {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
 }

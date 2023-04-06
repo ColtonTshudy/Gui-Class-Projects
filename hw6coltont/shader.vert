@@ -1,4 +1,6 @@
-// (thank you to Adam Ferriss for the foundation of these example shaders)
+// Colton Tshudy
+// 04/06/2023
+
 // position information that is used with gl_Position
 attribute vec3 aPosition;
 

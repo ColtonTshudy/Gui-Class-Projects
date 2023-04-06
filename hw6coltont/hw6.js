@@ -20,9 +20,9 @@ const gear_sketch = ( sketch ) => {
   sketch.draw = () => {
     sketch.shader(gearShader)
     gearShader.setUniform("u_time",t)
-    gearShader.setUniform("u_resolution",[400, 400])
+    gearShader.setUniform("u_resolution",[sketch.width, sketch.width])
     gearShader.setUniform("u_teeth", slider.value)
-    sketch.rect(0,0,sketch.width,sketch.height)
+    sketch.circle(0,sketch.width,sketch.height)
     t++
   };
 };
