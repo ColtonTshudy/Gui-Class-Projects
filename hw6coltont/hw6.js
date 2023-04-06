@@ -12,7 +12,8 @@ const gear_sketch = ( sketch ) => {
   }
 
   sketch.setup = () => {
-    let canvasGear = sketch.createCanvas(400, 400, sketch.WEBGL);
+    sketch.pixelDensity(1);
+    let canvasGear = sketch.createCanvas(400/window.devicePixelRatio, 400/window.devicePixelRatio, sketch.WEBGL);
     canvasGear.parent('gear-holder');
     t = 0
   };
