@@ -3,26 +3,64 @@
  * version: 04/05/2023
  */
 
+// Gear canvas
+const gear_sketch = ( sketch ) => {
+  sketch.preload = () =>{
+    gearShader = sketch.loadShader('shader.vert', 'gear-shader.frag');
+    slider = document.getElementById("gear-slider");
+    body = document.body;
+  }
 
-let myShader;
+  sketch.setup = () => {
+    let canvasGear = sketch.createCanvas(400, 400, sketch.WEBGL);
+    canvasGear.parent('gear-holder');
+    t = 0
+  };
 
-function preload() {
-  gearShader = loadShader('gear-shader.vert', 'gear-shader.frag');
-  slider = document.getElementById("gear-slider");
+  sketch.draw = () => {
+    sketch.shader(gearShader)
+    gearShader.setUniform("u_time",t)
+    gearShader.setUniform("u_resolution",[400, 400])
+    gearShader.setUniform("u_teeth", slider.value)
+    sketch.rect(0,0,sketch.width,sketch.height)
+    t++
+  };
+};
+
+// Background canvas
+const bg_sketch = ( sketch ) => {
+  sketch.preload = () =>{
+    shaderBg = sketch.loadShader('shader.vert', 'bg-shader.frag');
+    body = document.body;
+  }
+
+  sketch.setup = () => {
+    let canvasBg = sketch.createCanvas(body.clientWidth, body.clientHeight, sketch.WEBGL);
+    canvasBg.parent('bg-holder');
+    t = 0
+  };
+
+  sketch.draw = () => {
+    sketch.shader(shaderBg)
+    shaderBg.setUniform("u_time",t)
+    sketch.rect(0,0,sketch.width,sketch.height)
+    t++
+  };
+};
+
+// Onload, occurs once
+function onload(){
+  let gear = new p5(gear_sketch)
+  let bg = new p5(bg_sketch)
+  addEventListener("resize", () => { windowResized(bg) })
 }
 
-function setup() {
-  var canvas = createCanvas(400, 400, WEBGL);
-  canvas.parent('sketch-holder');
-  t = 0
-  
+// Occurs every time the window is resized
+function windowResized(bg) {
+  bg.resizeCanvas(body.clientWidth, body.clientHeight)
 }
 
-function draw() {
-  shader(gearShader)
-  gearShader.setUniform("u_time",t)
-  gearShader.setUniform("u_resolution",[width, height])
-  gearShader.setUniform("u_teeth", slider.value)
-  rect(0,0,width,height)
-  t++
+function updateSliderCount() {
+  const a = document.getElementById("numbah");
+  a.innerHTML = slider.value
 }

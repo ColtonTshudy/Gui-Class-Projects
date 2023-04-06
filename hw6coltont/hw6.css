@@ -8,11 +8,12 @@ html {
     height: 100%;
     width: 100%;
 
-    background-color: rgba(182, 29, 182, 1);
-    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
     margin: 0px;
     padding: 0px;
     border: 0px;
+    overflow: hidden;
 }
 
 .full-size {
@@ -37,4 +38,26 @@ html {
 #gear-slider {
     margin: 15px;
     align-self: stretch;
+}
+
+
+#bg-holder {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -2;
+    overflow: hidden;
+}
+
+#numbah {
+    font-size: 70vw;
+    font-style: italic;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    color: transparent;
+    text-shadow: 0 0 20px white;
 }
