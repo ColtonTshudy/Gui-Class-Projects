@@ -2,6 +2,9 @@ precision mediump float;
 
 uniform vec2 u_resolution;
 uniform float u_time;
+uniform float u_teeth;
+
+varying vec2 vectorCoord;
 
 #define Pi 3.14159265359
 
@@ -61,29 +64,33 @@ void DrawGear(inout vec3 color, vec2 uv, Gear g, float eps)
 }
 
 void main() {
-    float t = 0.05*u_time;
+    float t = 0.1*u_time;
     vec2 uv = 2.0*(gl_FragCoord.xy - 0.5*u_resolution.xy)/u_resolution.y;
     float eps = 2.0/u_resolution.y;
 
     // Scene parameters;
-	vec3 base = vec3(0.95, 0.7, 0.2);
-    const float count = 4.0;
-
-    Gear outer = Gear(0.0, 0.8, 0.08, 4.0, 40.0, 0.9, base);
-    Gear inner = Gear(0.0, 0.4, 0.08, 4.0, 20.0, 0.3, base);
+	vec3 color = vec3(vectorCoord, 1.0);
+    const float count = 3.0;
     
-    // Draw inner gears back to front:
-    vec3 color = vec3(0.0);
+    vec3 bg_color = vec3(0.0);
+    
+    float inner_radius = 0.2;
+    float outer_radius = 0.4;
+
+    Gear base_gear = Gear(0.0, outer_radius, 0.15, 5.0, u_teeth, inner_radius, color);
+
     for(float i=0.0; i<count; i++)
     {
-        t += 2.0*Pi/count;
- 	    inner.t = 20.0*t;
-        inner.color = base*(0.35 + 0.6*i/(count-1.0));
-        DrawGear(color, uv+0.4*vec2(cos(t),sin(t)), inner, eps);
+        base_gear.color = color/2.0*(i+1.0);
+ 	    base_gear.t = t;
+        base_gear.diskR = inner_radius;
+        base_gear.gearR = outer_radius;
+        DrawGear(bg_color, uv, base_gear, eps);
+
+        inner_radius+=0.2;
+        outer_radius+=0.2;
+        t = -t;
     }
     
-    // Draw outer gear:
-    DrawGear(color, uv, outer, eps);
-    
-    gl_FragColor = vec4(color,1.0);
+    gl_FragColor = vec4(bg_color,1.0);
 }
