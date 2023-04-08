@@ -12,8 +12,7 @@ const gear_sketch = ( sketch ) => {
   }
 
   sketch.setup = () => {
-    sketch.pixelDensity(1);
-    let canvasGear = sketch.createCanvas(400/window.devicePixelRatio, 400/window.devicePixelRatio, sketch.WEBGL);
+    let canvasGear = sketch.createCanvas(400, 400, sketch.WEBGL);
     canvasGear.parent('gear-holder');
     t = 0
   };
@@ -21,7 +20,7 @@ const gear_sketch = ( sketch ) => {
   sketch.draw = () => {
     sketch.shader(gearShader)
     gearShader.setUniform("u_time",t)
-    gearShader.setUniform("u_resolution",[sketch.width, sketch.width])
+    gearShader.setUniform("u_resolution",[sketch.width*sketch.pixelDensity(), sketch.width*sketch.pixelDensity()])
     gearShader.setUniform("u_teeth", slider.value)
     sketch.circle(0,sketch.width,sketch.height)
     t++
