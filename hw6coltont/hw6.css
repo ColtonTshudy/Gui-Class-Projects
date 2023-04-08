@@ -1,6 +1,6 @@
 /*
  * author: Colton Tshudy
- * version: 04/05/2023
+ * version: 04/06/2023
  */
 
 body,
@@ -30,7 +30,6 @@ html {
 
 #container {
     margin: auto auto;
-    
     padding: 15px;
     border-radius: 10px;
 }
@@ -63,7 +62,6 @@ html {
 
 #note {
     font-size: 1.5vw;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
     padding: 3px;
 }
 
