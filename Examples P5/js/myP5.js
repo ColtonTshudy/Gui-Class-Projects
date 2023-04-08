@@ -176,7 +176,7 @@ function Box(){
 
 function draw(){
     background(100)
-    //translateScaleThenRot()
+    translateScaleThenRot()
     //rotateUsingMatrix2D()
     //translateUsingMatrix2d()
     //scaleUsingMatrix2d()
