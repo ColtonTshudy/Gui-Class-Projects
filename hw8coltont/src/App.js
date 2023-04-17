@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import PieChart from './components/pie-chart';
+import BarChart from './components/bar-chart';
 import Data from './rsc/data.json';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
 
             <div id="bottom-graphs" className="flex-row full-size">
                 <div id="pie" className="bordered full-size">
-                    <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={colorScheme}/>
+                    <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={colorScheme} />
                 </div>
                 <div id="info" className="bordered full-size flex-column">
                     <h1>Info</h1>
@@ -36,7 +37,7 @@ function App() {
                     {/* <InfoList className="align-left" /> */}
                 </div>
                 <div id="bar" className="bordered full-size flex-column">
-                    {/* <BarChart data={data} /> */}
+                    <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={colorScheme} />
                 </div>
             </div>
         </div>
@@ -59,7 +60,7 @@ function dataAverage(data, exclusions) {
         }
     })
 
-    averages = Object.entries(totals).map(([key, value]) => ({ language: key, averages: value }))
+    averages = Object.entries(totals).map(([key, value]) => ({ language: key, average: Math.floor(value / data.length) }))
 
     return averages
 }

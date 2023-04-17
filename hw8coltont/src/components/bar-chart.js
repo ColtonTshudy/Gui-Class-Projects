@@ -56,15 +56,16 @@ const BarChart = (props) => {
         const shortestSide = Math.min(w, h)
         const graphW = shortestSide - margin.left - margin.right
         const graphH = shortestSide - margin.top - margin.bottom
-
-        // Build data
-        dataArray = Object.entries(data).map(([key, value]) => ({ language: key, average: value }))
-        console.log('Bargraph Data:')
-        console.log(dataArray)
+        const outerRadius = Math.min(graphW, graphH) / 2
+        const innerRadius = outerRadius / 4
 
         // Remove old svg
         d3.select(root)
             .select('svg')
+            .remove();
+
+        d3.select(root)
+            .select('div')
             .remove();
 
         // Create new svg
@@ -93,7 +94,7 @@ const BarChart = (props) => {
         const pieGenerator = d3
             .pie()
             .padAngle(0)
-            .value((d) => d.count);
+            .value((d) => d.average);
         const arc = svg
             .selectAll()
             .data(pieGenerator(data))
@@ -105,22 +106,28 @@ const BarChart = (props) => {
             .attr('d', arcGenerator)
             .style('fill', (_, i) => colors[i])
             .style('stroke', '#ffffff')
-            .style('stroke-width', 0);
+            .style('stroke-width', 0)
 
-        // Append text labels
-        arc
-            .append('text')
-            .attr('text-anchor', 'middle')
-            .attr('alignment-baseline', 'middle')
-            .text((d) => d.data.language)
-            .style('fill', '#ffffff')
-            .attr('transform', (d) => {
-                const [x, y] = arcGenerator.centroid(d);
-                return `translate(${x}, ${y})`;
-            });
+        // Tooltips
+        let pieTip = d3.select(root)
+            .append('div')
+            .attr('id', 'pie-tip')
+            .attr('pointer-events', 'none')
+
+        arc.selectAll('path')
+            .on('mousemove', (e, d) => {
+                pieTip.style('opacity', 1)
+                    .text(`${d.data.language}: ${d.data.average}`)
+                    .style('position', 'absolute')
+                    .style('left', (e.pageX + 10) + 'px')
+                    .style('top', (e.pageY + 10) + 'px');
+            })
+            .on('mouseleave', () => {
+                pieTip.style('opacity', 0)
+            })
     }
 
     return <div id={id} ref={myRef} className={className} />;
 }
 
-export default PieChart;
+export default BarChart;

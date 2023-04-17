@@ -95,7 +95,7 @@
   border-width: 2px;
   border-radius: 5px;
   padding: 5px;
-  visibility: hidden;
+  opacity: 0;
 }
 
 #scatter-tip {
