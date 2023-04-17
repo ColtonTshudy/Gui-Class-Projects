@@ -111,20 +111,20 @@ const BarChart = (props) => {
             .attr('stroke-width', 4)
 
         // Tooltips
-        let barTip = d3.select(root)
+        let tooltip = d3.select(root)
             .append('div')
-            .attr('id', 'pie-tip')
+            .attr('class', 'tooltip')
             .attr('pointer-events', 'none')
 
         bars
             .on('mousemove', (e, d) => {
-                barTip.style('opacity', 1)
+                tooltip.style('opacity', 1)
                     .text(`${d.language}: ${d.average}`)
                     .style('left', (e.pageX + 10) + 'px')
                     .style('top', (e.pageY + 10) + 'px');
             })
             .on('mouseleave', () => {
-                barTip.style('opacity', 0)
+                tooltip.style('opacity', 0)
             })
     }
 

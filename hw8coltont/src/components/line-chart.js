@@ -98,9 +98,9 @@ const LineChart = (props) => {
             .call(d3.axisLeft(yScale));
 
         // Tooltips
-        let dotTip = d3.select(root)
+        let tooltip = d3.select(root)
             .append('div')
-            .attr('id', 'pie-tip')
+            .attr('class', 'tooltip')
             .attr('pointer-events', 'none')
 
         // Draw data points
@@ -119,13 +119,13 @@ const LineChart = (props) => {
                     .attr("fill", colors[i])
                     .attr("data-tooltip", d => `${k}: ${d.k} (${d.Week})`)
                     .on('mousemove', (e, d) => {
-                        dotTip.style('opacity', 1)
+                        tooltip.style('opacity', 1)
                             .text(`${k}: ${d[k]}`)
                             .style('left', (e.pageX + 10) + 'px')
                             .style('top', (e.pageY + 10) + 'px');
                     })
                     .on('mouseleave', () => {
-                        dotTip.style('opacity', 0)
+                        tooltip.style('opacity', 0)
                     })
                 )
                 i++

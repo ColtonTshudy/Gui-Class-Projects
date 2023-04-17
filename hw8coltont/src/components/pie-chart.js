@@ -110,20 +110,20 @@ const PieChart = (props) => {
             .style('stroke-width', 0)
 
         // Tooltips
-        let pieTip = d3.select(root)
+        let tooltip = d3.select(root)
             .append('div')
-            .attr('id', 'pie-tip')
+            .attr('class', 'tooltip')
             .attr('pointer-events', 'none')
 
         arc.selectAll('path')
             .on('mousemove', (e, d) => {
-                pieTip.style('opacity', 1)
+                tooltip.style('opacity', 1)
                     .text(`${d.data.language}: ${d.data.average}`)
                     .style('left', (e.pageX + 10) + 'px')
                     .style('top', (e.pageY + 10) + 'px');
             })
             .on('mouseleave', () => {
-                pieTip.style('opacity', 0)
+                tooltip.style('opacity', 0)
             })
     }
 
