@@ -81,15 +81,17 @@
 }
 
 #bar-tip {
+  position: absolute;
   background-color: white;
   border: solid;
   border-width: 2px;
   border-radius: 5px;
   padding: 5px;
-  visibility: hidden;
+  opacity: 0;
 }
 
 #pie-tip {
+  position:absolute;
   background-color: white;
   border: solid;
   border-width: 2px;

@@ -56,14 +56,13 @@ const BarChart = (props) => {
         const shortestSide = Math.min(w, h)
         const graphW = shortestSide - margin.left - margin.right
         const graphH = shortestSide - margin.top - margin.bottom
-        const outerRadius = Math.min(graphW, graphH) / 2
-        const innerRadius = outerRadius / 4
 
         // Remove old svg
         d3.select(root)
             .select('svg')
             .remove();
 
+        // Remove old tooltip
         d3.select(root)
             .select('div')
             .remove();
@@ -75,55 +74,58 @@ const BarChart = (props) => {
             .attr('width', w)
             .attr('height', h)
             .append('g')
-            .attr('transform', `translate(${w / 2}, ${h / 2 + margin.top / 2 - margin.bottom / 2})`);
+            .attr('transform', `translate(${(w-graphW)/2}, ${(h-graphH)/2})`);
 
         // Append title
         svg.append("text")
             .attr("x", 0)
-            .attr("y", -h / 2 + margin.top / 2)
+            .attr("y", 0)
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
             .style("text-decoration", "underline")
             .text(title);
 
-        // Generate arc data
-        const arcGenerator = d3
-            .arc()
-            .innerRadius(innerRadius)
-            .outerRadius(outerRadius);
-        const pieGenerator = d3
-            .pie()
-            .padAngle(0)
-            .value((d) => d.average);
-        const arc = svg
-            .selectAll()
-            .data(pieGenerator(data))
-            .enter();
+        // X axis
+        var x = d3.scaleBand()
+            .domain(data.map(d => d.language))
+            .range([0, graphW])
+            .padding(0.1);
 
-        // Append sectors
-        arc
-            .append('path')
-            .attr('d', arcGenerator)
-            .style('fill', (_, i) => colors[i])
-            .style('stroke', '#ffffff')
-            .style('stroke-width', 0)
+        // Y axis
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d.average)])
+            .range([graphH, 0])
+
+        let colorBar = d3.scaleThreshold().domain(data.map(d => d.language)).range(colors)
+
+        // Bars
+        const bars = svg.selectAll("mybar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", function (d) { return x(d.language) })
+            .attr("y", function (d) { return y(d.average) })
+            .attr("width", x.bandwidth())
+            .attr("height", function (d) { return graphH - y(d.average); })
+            .attr('fill', d => colorBar(d.language))
+            .attr('stroke', 'black')
+            .attr('stroke-width', 4)
 
         // Tooltips
-        let pieTip = d3.select(root)
+        let barTip = d3.select(root)
             .append('div')
             .attr('id', 'pie-tip')
             .attr('pointer-events', 'none')
 
-        arc.selectAll('path')
+        bars
             .on('mousemove', (e, d) => {
-                pieTip.style('opacity', 1)
-                    .text(`${d.data.language}: ${d.data.average}`)
-                    .style('position', 'absolute')
+                barTip.style('opacity', 1)
+                    .text(`${d.language}: ${d.average}`)
                     .style('left', (e.pageX + 10) + 'px')
                     .style('top', (e.pageY + 10) + 'px');
             })
             .on('mouseleave', () => {
-                pieTip.style('opacity', 0)
+                barTip.style('opacity', 0)
             })
     }
 

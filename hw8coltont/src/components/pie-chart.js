@@ -64,6 +64,7 @@ const PieChart = (props) => {
             .select('svg')
             .remove();
 
+        // Remove old tooltip
         d3.select(root)
             .select('div')
             .remove();
@@ -118,7 +119,6 @@ const PieChart = (props) => {
             .on('mousemove', (e, d) => {
                 pieTip.style('opacity', 1)
                     .text(`${d.data.language}: ${d.data.average}`)
-                    .style('position', 'absolute')
                     .style('left', (e.pageX + 10) + 'px')
                     .style('top', (e.pageY + 10) + 'px');
             })
