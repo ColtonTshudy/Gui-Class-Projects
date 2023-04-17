@@ -11,7 +11,6 @@ const Checklist = (props) => {
     const {
         data,
         className,
-        id,
         selected,
         setSelected
     } = props;
@@ -40,7 +39,7 @@ const Checklist = (props) => {
 
     return (
         <>
-            <Box id= {id} className={className}>
+            <Box className={className}>
                 <DataGrid columns={cols} rows={rows}
                     disableRowSelectionOnClick
                     checkboxSelection

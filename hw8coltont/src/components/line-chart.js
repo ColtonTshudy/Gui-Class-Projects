@@ -10,7 +10,6 @@ const LineChart = (props) => {
     const {
         data,
         className,
-        id,
         title,
         colors = ['red', 'green', 'blue'],
         dotRadius = 4,
@@ -163,7 +162,7 @@ const LineChart = (props) => {
             .style("stroke", d => d === 'javascript' ? colors[0] : d === 'python' ? colors[1] : colors[2])
     }
 
-    return <div id={id} ref={myRef} className={className} />;
+    return <div ref={myRef} className={className} />;
 }
 
 export default LineChart;

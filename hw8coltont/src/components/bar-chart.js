@@ -10,7 +10,6 @@ const BarChart = (props) => {
     const {
         data,
         className,
-        id,
         title,
         colors = ['red', 'green', 'blue']
     } = props;
@@ -124,7 +123,7 @@ const BarChart = (props) => {
             })
     }
 
-    return <div id={id} ref={myRef} className={className} />;
+    return <div ref={myRef} className={className} />;
 }
 
 export default BarChart;

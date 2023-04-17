@@ -10,7 +10,6 @@ const PieChart = (props) => {
     const {
         data,
         className,
-        id,
         title,
         colors = ['red', 'green', 'blue']
     } = props;
@@ -125,7 +124,7 @@ const PieChart = (props) => {
 
     }
 
-    return <div id={id} ref={myRef} className={className} />;
+    return <div ref={myRef} className={className} />;
 }
 
 export default PieChart;
