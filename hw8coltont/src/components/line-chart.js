@@ -43,7 +43,7 @@ const LineChart = (props) => {
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
+    }, [data, selected]);
 
     // Draws graph
     function drawChart() {
