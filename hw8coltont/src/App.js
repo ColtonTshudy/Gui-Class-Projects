@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Data from './rsc/data.json';
 import PieChart from './components/pie-chart';
 import BarChart from './components/bar-chart';
 import LineChart from './components/line-chart';
+import Checklist from './components/checklist';
+
+localStorage.setItem("searchData", JSON.stringify(Data))
+const data = JSON.parse(localStorage.getItem("searchData"))
+data.forEach((item, idx) => item.id = idx)
+console.log('data:')
+console.log(data)
+
+const averages = dataAverage(data, ["Week", "id"]);
+console.log('averages:')
+console.log(averages)
 
 function App() {
-
-    localStorage.setItem("searchData", JSON.stringify(Data))
-    let data = JSON.parse(localStorage.getItem("searchData"))
-    console.log('data:')
-    console.log(data)
-
-    let averages = dataAverage(data, ["Week"]);
-    console.log('averages:')
-    console.log(averages)
+    let [state, setState] = useState([])
 
     return (
         <div id="main-window" className="flex-row">
@@ -23,7 +26,7 @@ function App() {
 
                 <div id="top-graphs" className="full-size">
                     <div id="scatter" className="bordered full-size flex-column">
-                        <LineChart data={data} title="Scatter Plot" className="full-size flex-center" colors={['blue', 'green', 'red']} dotRadius={4} />
+                        <LineChart data={data} title="Scatter Plot" className="full-size flex-center" colors={['blue', 'green', 'red']} dotRadius={4} ignoredKeys={["Week", "id"]} selected={state} setSelected={setState} />
                     </div>
                 </div>
 
@@ -39,7 +42,9 @@ function App() {
             </div>
 
             <div id="mui-window" className="full-size">
-                {/* <Checklist /> */}
+                <div id="data-grid" className="full-size bordered">
+                    <Checklist data={data} className="full-size" selected={state} setSelected={setState}/>
+                </div>
             </div>
 
         </div>
