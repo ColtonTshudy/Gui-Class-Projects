@@ -6,9 +6,6 @@ import Data from './rsc/data.json';
 
 function App() {
 
-    // Grpah color scheme
-    const colorScheme = ['red', 'green', 'blue']
-
     localStorage.setItem("searchData", JSON.stringify(Data))
     let data = JSON.parse(localStorage.getItem("searchData"))
     console.log('data:')
@@ -29,7 +26,7 @@ function App() {
 
             <div id="bottom-graphs" className="flex-row full-size">
                 <div id="pie" className="bordered full-size">
-                    <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={colorScheme} />
+                    <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={['red', 'green', 'blue']} />
                 </div>
                 <div id="info" className="bordered full-size flex-column">
                     <h1>Info</h1>
@@ -37,7 +34,7 @@ function App() {
                     {/* <InfoList className="align-left" /> */}
                 </div>
                 <div id="bar" className="bordered full-size flex-column">
-                    <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={colorScheme} />
+                    <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={['blue', 'red', 'green']} />
                 </div>
             </div>
         </div>

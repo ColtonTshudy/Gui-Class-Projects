@@ -53,9 +53,8 @@ const BarChart = (props) => {
         const root = myRef.current;
 
         // Size based on variables w and h
-        const shortestSide = Math.min(w, h)
-        const graphW = shortestSide - margin.left - margin.right
-        const graphH = shortestSide - margin.top - margin.bottom
+        const graphW = w - margin.left - margin.right
+        const graphH = h - margin.top - margin.bottom
 
         // Remove old svg
         d3.select(root)
@@ -78,7 +77,7 @@ const BarChart = (props) => {
 
         // Append title
         svg.append("text")
-            .attr("x", 0)
+            .attr("x", graphW/2)
             .attr("y", 0)
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
@@ -93,7 +92,7 @@ const BarChart = (props) => {
 
         // Y axis
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.average)])
+            .domain([0, d3.max(data, d => d.average)*(1+1/margin.top)])
             .range([graphH, 0])
 
         let colorBar = d3.scaleThreshold().domain(data.map(d => d.language)).range(colors)
