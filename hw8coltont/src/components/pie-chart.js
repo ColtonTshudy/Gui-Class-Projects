@@ -16,7 +16,7 @@ const PieChart = (props) => {
     } = props;
 
     const margin = {
-        top: 20, right: 10, bottom: 10, left: 10,
+        top: 30, right: 10, bottom: 10, left: 10,
     };
 
     // Placeholder size values
@@ -81,7 +81,7 @@ const PieChart = (props) => {
         // Append title
         svg.append("text")
             .attr("x", 0)
-            .attr("y", -h / 2 + margin.top / 2)
+            .attr("y", -h / 2 + margin.top / 4)
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
             .style("text-decoration", "underline")
