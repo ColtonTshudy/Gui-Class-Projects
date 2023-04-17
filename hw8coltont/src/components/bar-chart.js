@@ -73,11 +73,11 @@ const BarChart = (props) => {
             .attr('width', w)
             .attr('height', h)
             .append('g')
-            .attr('transform', `translate(${(w-graphW)/2}, ${(h-graphH)/2})`);
+            .attr('transform', `translate(${(w - graphW) / 2}, ${(h - graphH) / 2})`);
 
         // Append title
         svg.append("text")
-            .attr("x", graphW/2)
+            .attr("x", graphW / 2)
             .attr("y", 0)
             .attr("text-anchor", "middle")
             .style("font-size", "16px")
@@ -92,7 +92,7 @@ const BarChart = (props) => {
 
         // Y axis
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.average)*(1+1/margin.top)])
+            .domain([0, d3.max(data, d => d.average) * (1 + 1 / margin.top)])
             .range([graphH, 0])
 
         let colorBar = d3.scaleThreshold().domain(data.map(d => d.language)).range(colors)
