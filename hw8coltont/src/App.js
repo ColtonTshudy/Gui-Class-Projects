@@ -17,22 +17,31 @@ function App() {
     console.log(averages)
 
     return (
-        <div id="main-window" className="flex-column">
+        <div id="main-window" className="flex-row">
 
-            <div id="top-graphs" className="full-size">
-                <div id="scatter" className="bordered full-size flex-column">
-                <LineChart data={data} title="Scatter Plot" className="full-size flex-center" colors={['blue', 'green', 'red']} dotRadius={4}/>
+            <div id="graph-window" className="flex-column full-size">
+
+                <div id="top-graphs" className="full-size">
+                    <div id="scatter" className="bordered full-size flex-column">
+                        <LineChart data={data} title="Scatter Plot" className="full-size flex-center" colors={['blue', 'green', 'red']} dotRadius={4} />
+                    </div>
                 </div>
+
+                <div id="bottom-graphs" className="flex-row full-size">
+                    <div id="pie" className="bordered full-size">
+                        <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={['red', 'green', 'blue']} />
+                    </div>
+                    <div id="bar" className="bordered full-size flex-column">
+                        <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={['blue', 'red', 'green']} />
+                    </div>
+                </div>
+
             </div>
 
-            <div id="bottom-graphs" className="flex-row full-size">
-                <div id="pie" className="bordered full-size">
-                    <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={['red', 'green', 'blue']} />
-                </div>
-                <div id="bar" className="bordered full-size flex-column">
-                    <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={['blue', 'red', 'green']} />
-                </div>
+            <div id="mui-window" className="full-size">
+                {/* <Checklist /> */}
             </div>
+
         </div>
     );
 }

@@ -91,7 +91,8 @@ const PieChart = (props) => {
         const arcGenerator = d3
             .arc()
             .innerRadius(innerRadius)
-            .outerRadius(outerRadius);
+            .outerRadius(outerRadius)
+            .padAngle(.05);
         const pieGenerator = d3
             .pie()
             .padAngle(0)
@@ -125,6 +126,7 @@ const PieChart = (props) => {
             .on('mouseleave', () => {
                 tooltip.style('opacity', 0)
             })
+
     }
 
     return <div id={id} ref={myRef} className={className} />;
