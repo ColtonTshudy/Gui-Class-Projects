@@ -12,12 +12,12 @@ data.forEach((item, idx) => item.id = idx)
 console.log('data:')
 console.log(data)
 
-const averages = dataAverage(data, ["Week", "id"]);
-console.log('averages:')
-console.log(averages)
+
 
 function App() {
     let [state, setState] = useState([])
+    const averages = dataAverage(data, ["Week", "id"]);
+    console.log('averages:')
     console.log(averages)
 
     return (
@@ -33,10 +33,10 @@ function App() {
 
                 <div id="bottom-graphs" className="flex-row full-size">
                     <div id="pie" className="bordered full-size">
-                        {/* <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={['red', 'green', 'blue']} /> */}
+                        <PieChart data={averages} title="Pie Chart" className="full-size flex-center" colors={['red', 'green', 'blue']} />
                     </div>
                     <div id="bar" className="bordered full-size flex-column">
-                        {/* <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={['blue', 'red', 'green']} /> */}
+                        <BarChart data={averages} title="Histogram" className="full-size flex-center" colors={['blue', 'red', 'green']} />
                     </div>
                 </div>
 

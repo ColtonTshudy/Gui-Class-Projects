@@ -41,7 +41,6 @@ const Checklist = (props) => {
         <>
             <Box className={className}>
                 <DataGrid columns={cols} rows={rows}
-                    disableRowSelectionOnClick
                     checkboxSelection
                     slots={
                         { toolbar: CustomToolbar }
