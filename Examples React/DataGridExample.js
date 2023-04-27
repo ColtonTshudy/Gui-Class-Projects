@@ -30,9 +30,8 @@ function DataGridExample () {
     }
 
 
-    const handleOnSelectedRow = (newSelectedItems) => {
-        console.log(newSelectedItems)
-        setSelectedRows(newSelectedItems)
+    const handleOnSelectedRow = (newSelectedList) => {
+        setSelectedRows(newSelectedList)
     }
 
     const rows = [

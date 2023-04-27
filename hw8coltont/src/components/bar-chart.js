@@ -10,7 +10,6 @@ const BarChart = (props) => {
     const {
         data,
         className,
-        id,
         title,
         colors = ['red', 'green', 'blue']
     } = props;
@@ -19,22 +18,14 @@ const BarChart = (props) => {
         top: 20, right: 10, bottom: 10, left: 10,
     };
 
-    // Placeholder size values
-    let w = 200
-    let h = 200
-
     const myRef = React.createRef();
 
     useEffect(() => {
         // Runs on mount
-        w = myRef.current.clientWidth
-        h = myRef.current.clientHeight
         drawChart();
 
         // Runs on resize
         function handleResize() {
-            w = myRef.current.clientWidth
-            h = myRef.current.clientHeight
             drawChart();
         }
 
@@ -45,12 +36,16 @@ const BarChart = (props) => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     // Draws graph
     function drawChart() {
         // Parent element
         const root = myRef.current;
+        let w = root.clientWidth
+        let h = root.clientHeight
 
         // Size based on variables w and h
         const graphW = w - margin.left - margin.right
@@ -128,7 +123,7 @@ const BarChart = (props) => {
             })
     }
 
-    return <div id={id} ref={myRef} className={className} />;
+    return <div ref={myRef} className={className} />;
 }
 
 export default BarChart;

@@ -13,13 +13,14 @@
 }
 
 #graph-window {
-  flex: 0 0 49%;
+  flex: 0 0 59%;
   padding: 10px;
   justify-content: space-between;
 }
 
 #mui-window {
-  flex: 0 0 49%;
+  flex: 0 0 39%;
+  padding: 10px;
 }
 
 .full-size {
@@ -62,6 +63,10 @@
   align-self: flex-start;
 }
 
+#data-grid {
+  padding: 5px
+}
+
 #top-graphs {
   flex: 0 0 60%;
   height: 60%;
@@ -95,4 +100,10 @@
   border-radius: 5px;
   padding: 5px;
   opacity: 0;
+}
+
+.selected {
+  stroke: black;
+  stroke-width: 2px;
+  fill: yellow;
 }
