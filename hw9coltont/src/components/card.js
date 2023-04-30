@@ -11,6 +11,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActionArea from '@mui/material/CardActionArea';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { NavLink } from "react-router-dom";
 
 export default function MediaCard({ title, index }) {
     return (
@@ -20,17 +21,14 @@ export default function MediaCard({ title, index }) {
                 image="http://via.placeholder.com/150x150"
                 title={`${title} picture`}
             />
-            <CardActionArea href="https://google.com">
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {`${title}`}
-                    </Typography>
-                    <Typography gutterBottom variant="p " component="div">
-                        {`${title} description`}
-                    </Typography>
-                </CardContent>
-
-            </CardActionArea>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    <NavLink to={`/projects/${index}`} >{title}</NavLink>
+                </Typography>
+                <Typography gutterBottom variant="p " component="div">
+                    <NavLink to={`/projects/${index}`} >{`${title} description`}</NavLink>
+                </Typography>
+            </CardContent>
         </Card>
     );
 }

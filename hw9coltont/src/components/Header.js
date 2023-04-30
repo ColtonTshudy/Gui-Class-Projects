@@ -26,7 +26,7 @@ function Tabs({ name, link }) {
 
 function Header() {
     const tabsValue = ["Home", "Projects", "Do-not-click-:)"]
-    const tabsLink = ["/", "/projects", "/e"]
+    const tabsLink = ["/", "/projects", "/lol"]
     return (
         <header>
             <nav>
