@@ -1,4 +1,8 @@
 {
     "liveServer.settings.multiRootWorkspaceName": "Gui-Class-Projects",
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
 }
