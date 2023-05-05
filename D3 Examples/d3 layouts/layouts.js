@@ -171,7 +171,7 @@ function d3ScaleThresholdExample() {
     color(1000); // "green"
 }
 
-const hierarchyExample = {
+const data = {
     "value": 10,
     "children": [
         {
@@ -220,7 +220,7 @@ const relationshipTable =
 
 function exploringTree() {
 
-    let hierarchyData = d3.hierarchy(hierarchyExample)
+    let hierarchyData = d3.hierarchy(data)
     console.log(hierarchyData)
 
     // Using table of relationships
@@ -300,7 +300,7 @@ function exploringTree() {
 }
 
 function exploringCluster() {
-    let hierarchyData = d3.hierarchy(hierarchyExample)
+    let hierarchyData = d3.hierarchy(data)
 
     let g = d3.select('#cluster')
         .append('svg')
@@ -336,7 +336,7 @@ function exploringCluster() {
 }
 
 function exploringRadialLayout() {
-    let hierarchyData = d3.hierarchy(hierarchyExample)
+    let hierarchyData = d3.hierarchy(data)
 
     let g = d3.select('#radial')
         .append('svg')
@@ -387,7 +387,7 @@ function exploringRadialLayout() {
 }
 
 function exploringTreemap() {
-    let data = d3.hierarchy(hierarchyExample)
+    let data = d3.hierarchy(data)
     data.sum(d => d.value ? 1 : 0)
     data.sort((a, b) => b.value - a.value || b.height - a.height)
     console.log(data)
@@ -427,7 +427,7 @@ function exploringTreemap() {
 }
 
 function exploringParitionLayout() {
-    let data = d3.hierarchy(hierarchyExample)
+    let data = d3.hierarchy(data)
     data.sum(d => d.value ? 1 : 0)
     data.sort((a, b) => b.value - a.value || b.height - a.height)
     console.log(data)
@@ -467,7 +467,7 @@ function exploringParitionLayout() {
 }
 
 function exploringPackingLayout() {
-    let data = d3.hierarchy(hierarchyExample)
+    let data = d3.hierarchy(data)
     data.sum(d => d.value ? 1 : 0)  // we need the value property for pack
     //data.sort((a, b)=> b.value - a.value || b.height - a.height)
     console.log(data)
