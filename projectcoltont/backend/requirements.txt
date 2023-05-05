@@ -1,6 +1,7 @@
-Flask
+flask
 pymongo[srv]
-Flask-PyMongo
-Flask-Cors
+flask-cors
 configparser
 waitress
+bson
+json

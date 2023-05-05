@@ -40,7 +40,7 @@ const Checklist = (props) => {
     return (
         <>
             <Box className={className}>
-                <DataGrid columns={cols} rows={rows}
+                <DataGrid getRowId={row => row.id} columns={cols} rows={rows}
                     checkboxSelection
                     slots={
                         { toolbar: CustomToolbar }

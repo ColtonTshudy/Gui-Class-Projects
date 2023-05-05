@@ -4,6 +4,8 @@
 from flask import Flask, request
 from flask_cors import CORS
 from waitress import serve
+from bson import json_util
+import json
 
 from pymongo import MongoClient
 from configparser import ConfigParser
@@ -17,24 +19,28 @@ config_path = os.path.join(absolute_path, relative_path)
 config = ConfigParser()
 config.read(config_path)
 
-db_url = config['DB']['db_url']
+db_uri = config['DB']['db_uri']
 
 ### CREATE FLASK APP
 app = Flask(__name__)
 CORS(app)
 
 ### CONNECT TO MONGODB
-client = MongoClient('0.0.0.0', 0, username='coltont@vt.edu', password='guiproject')
+client = MongoClient(db_uri)
 
-db = client.flask_db
-googleTrends = db.googleTrends
-print(googleTrends.find())
+### PULL AND FORMAT DATA
+trends = client.Project.googleTrends
+global data
+data = []
+for trend in trends.find():
+    data.append(trend)
 
-@app.route("/data")
-def data():
-    global db
-    return db
+### APP ROUTES
+@app.route("/data", methods=['GET'])
+def return_db_data():
+    global data
+    return json.loads(json_util.dumps(data))
 
-if __name__ == "__main__":
-    app.run(debug=True, port=5001, threaded=True)
-    #serve(app, host='0.0.0.0', port=config['API_SERVER']['port'])
+### RUN
+app.run(debug=True, port=5001, threaded=True)
+#serve(app, host='0.0.0.0', port=config['API_SERVER']['port'])

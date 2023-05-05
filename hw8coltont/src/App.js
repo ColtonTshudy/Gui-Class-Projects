@@ -12,8 +12,6 @@ data.forEach((item, idx) => item.id = idx)
 console.log('data:')
 console.log(data)
 
-
-
 function App() {
     let [state, setState] = useState([])
     const averages = dataAverage(data, ["Week", "id"]);
@@ -44,7 +42,7 @@ function App() {
 
             <div id="mui-window" className="full-size">
                 <div id="data-grid" className="full-size bordered">
-                    <Checklist data={data} className="full-size" selected={state} setSelected={setState}/>
+                    <Checklist data={data} className="full-size" selected={state} setSelected={setState} />
                 </div>
             </div>
 

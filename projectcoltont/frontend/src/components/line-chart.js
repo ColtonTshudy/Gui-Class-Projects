@@ -47,7 +47,7 @@ const LineChart = (props) => {
     // Draws graph
     function drawChart() {
         // Parent element
-        const root = myRef.current;
+        const root = myRef.current
         let w = root.clientWidth
         let h = root.clientHeight
 
@@ -159,7 +159,7 @@ const LineChart = (props) => {
             .attr("d", d => line(data.map(e => ({ Week: e.Week, value: e[d] }))))
             .style("fill", "none")
             .style("stroke-width", "2px")
-            .style("stroke", d => d === 'javascript' ? colors[0] : d === 'python' ? colors[1] : colors[2])
+            .style("stroke", d => d === 'javascript' ? colors[1] : d === 'python' ? colors[2] : colors[0])
     }
 
     return <div ref={myRef} className={className} />;
