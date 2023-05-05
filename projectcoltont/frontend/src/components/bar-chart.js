@@ -19,14 +19,15 @@ const BarChart = (props) => {
     };
 
     const myRef = React.createRef();
+    const averages = dataAverage(data, ["Week", "id", "_id"])
 
     useEffect(() => {
         // Runs on mount
-        drawChart();
+        drawChart(averages);
 
         // Runs on resize
         function handleResize() {
-            drawChart();
+            drawChart(averages);
         }
 
         // Attach the event listener to the window object
@@ -38,10 +39,10 @@ const BarChart = (props) => {
         };
         
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
+    }, [averages]);
 
     // Draws graph
-    function drawChart() {
+    function drawChart(averages) {
         // Parent element
         const root = myRef.current;
         let w = root.clientWidth
@@ -81,20 +82,20 @@ const BarChart = (props) => {
 
         // X axis
         var x = d3.scaleBand()
-            .domain(data.map(d => d.language))
+            .domain(averages.map(d => d.language))
             .range([0, graphW])
             .padding(0.1);
 
         // Y axis
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.average) * (1 + 1 / margin.top)])
+            .domain([0, d3.max(averages, d => d.average) * (1 + 1 / margin.top)])
             .range([graphH, 0])
 
-        let colorBar = d3.scaleThreshold().domain(data.map(d => d.language)).range(colors)
+        let colorBar = d3.scaleThreshold().domain(averages.map(d => d.language)).range(colors)
 
         // Bars
         const bars = svg.selectAll("mybar")
-            .data(data)
+            .data(averages)
             .enter()
             .append("rect")
             .attr("x", function (d) { return x(d.language) })
@@ -124,6 +125,27 @@ const BarChart = (props) => {
     }
 
     return <div ref={myRef} className={className} />;
+}
+
+// Compute the averages of each key of our data, excluding certain keys
+function dataAverage(data, exclusions) {
+    let totals = {}
+    let averages = []
+
+    data.forEach((entry) => {
+        for (let k in entry) {
+            if (!(exclusions.includes(k))) {
+                if (k in totals) //add to existing value
+                    totals[k] = totals[k] + entry[k]
+                else //append new key to totalsionary
+                    totals[k] = entry[k]
+            }
+        }
+    })
+
+    averages = Object.entries(totals).map(([key, value]) => ({ language: key, average: Math.floor(value / data.length) }))
+
+    return averages
 }
 
 export default BarChart;

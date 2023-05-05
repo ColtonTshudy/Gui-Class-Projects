@@ -19,14 +19,15 @@ const PieChart = (props) => {
     };
 
     const myRef = React.createRef();
+    const averages = dataAverage(data, ["Week", "id", "_id"])
 
     useEffect(() => {
         // Runs on mount
-        drawChart();
+        drawChart(averages);
 
         // Runs on resize
         function handleResize() {
-            drawChart();
+            drawChart(averages);
         }
 
         // Attach the event listener to the window object
@@ -38,10 +39,10 @@ const PieChart = (props) => {
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
+    }, [averages]);
 
     // Draws graph
-    function drawChart() {
+    function drawChart(averages) {
         // Parent element
         const root = myRef.current;
         let w = root.clientWidth
@@ -94,7 +95,7 @@ const PieChart = (props) => {
             .value((d) => d.average);
         const arc = svg
             .selectAll()
-            .data(pieGenerator(data))
+            .data(pieGenerator(averages))
             .enter();
 
         // Append sectors
@@ -126,5 +127,28 @@ const PieChart = (props) => {
 
     return <div ref={myRef} className={className} />;
 }
+
+
+// Compute the averages of each key of our data, excluding certain keys
+function dataAverage(data, exclusions) {
+    let totals = {}
+    let averages = []
+
+    data.forEach((entry) => {
+        for (let k in entry) {
+            if (!(exclusions.includes(k))) {
+                if (k in totals) //add to existing value
+                    totals[k] = totals[k] + entry[k]
+                else //append new key to totalsionary
+                    totals[k] = entry[k]
+            }
+        }
+    })
+
+    averages = Object.entries(totals).map(([key, value]) => ({ language: key, average: Math.floor(value / data.length) }))
+
+    return averages
+}
+
 
 export default PieChart;
