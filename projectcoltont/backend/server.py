@@ -3,7 +3,6 @@
 
 from flask import Flask, request
 from flask_cors import CORS
-from waitress import serve
 from bson import json_util
 import json
 
@@ -42,5 +41,5 @@ def return_db_data():
     return json.loads(json_util.dumps(data))
 
 ### RUN
-app.run(debug=True, port=5001, threaded=True)
-#serve(app, host='0.0.0.0', port=config['API_SERVER']['port'])
+# Using debug mode here for simplicity
+app.run(debug=True, port=config['API_SERVER']['port'], threaded=True)

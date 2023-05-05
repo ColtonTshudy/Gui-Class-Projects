@@ -2,6 +2,5 @@ flask
 pymongo[srv]
 flask-cors
 configparser
-waitress
 bson
 json
